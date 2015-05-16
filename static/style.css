@@ -23,7 +23,8 @@ div.container {
 
 div.header {
 	background-color: #882222;
-	padding: 2ex 0;
+	padding: 2ex 2em;
+  position: relative;
 }
 
 div.header a {
@@ -33,6 +34,13 @@ div.header a {
 
 div.header a:hover {
   color: #bbbbbb;
+}
+
+div.header .blogtitle {
+  float: left;
+  color: #bbbbbb;
+  font-weight: bold;
+  position: absolute;
 }
 
 ul.navigation {

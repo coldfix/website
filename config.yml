@@ -1,6 +1,7 @@
 ---
 active_modules: [pygments, tags, blog, latex]
 author: Thomas Gläßle
+blogtitle: "cat /dev/brain |"
 canonical_url: http://www.coldfix.de
 modules:
   pygments:
