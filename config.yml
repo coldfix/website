@@ -5,6 +5,6 @@ blogtitle: "cat /dev/brain |"
 canonical_url: http://www.coldfix.de
 modules:
   pygments:
-    style: tango
+    style: monokai
 
 flattr_id: Kanarienmaus

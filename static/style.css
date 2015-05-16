@@ -126,3 +126,13 @@ div.content {
 div.footer div.flattr {
   text-align: right;
 }
+
+.hll pre {
+  padding: 10px;
+  line-height: normal;
+  font-size: 13px;
+}
+
+div.hll .cp {
+  color: #995599;
+}
