@@ -84,10 +84,8 @@ div.content > p.date {
 }
 
 div.entry-overview {
-  border: thin solid gray;
-  border-radius: 10px;
+  border-top: thin solid gray;
   margin-bottom: 3ex;
-  padding: 1ex;
 }
 
 div.entry-overview p {
