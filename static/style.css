@@ -119,6 +119,7 @@ ul.blog-archive > li {
 div.content {
   line-height: 29px;
   font-size: 16px;
+  text-align: justify;
 }
 
 div.footer div.flattr {
