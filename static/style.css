@@ -1,0 +1,120 @@
+@charset "utf-8";
+@import url(//fonts.googleapis.com/css?family=Merriweather:400);
+
+body {
+  font-family: Merriweather, Georgia, serif;
+  color: #222;
+}
+
+div {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+div.container {
+  max-width: 45em;
+  margin: 1ex auto;
+	border: thin solid white;
+}
+
+div.header {
+	background-color: #882222;
+	padding: 2ex 0;
+}
+
+div.header a {
+  color: white;
+  font-weight: bold;
+}
+
+div.header a:hover {
+  color: #bbbbbb;
+}
+
+ul.navigation {
+  list-style: none;
+	text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+ul.navigation > li {
+  display: inline;
+  margin: 0 1em;
+  padding: 0;
+}
+
+ul.tagcloud {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.tagcloud > li {
+  display: inline;
+  margin-right: 1em;
+  padding: 5px 5px 3px 5px;
+  border: thin solid gray;
+  border-radius: 6px;
+}
+
+div.content {
+  margin-top: 3ex;
+}
+
+div.content > p.date {
+  margin: 2.5ex 0;
+  padding: 1ex 0;
+  border-top: 3px double gray;
+  border-bottom: 3px double gray;
+  text-align: center;
+  color: gray;
+}
+
+div.entry-overview {
+  border: thin solid gray;
+  border-radius: 10px;
+  margin-bottom: 3ex;
+  padding: 1ex;
+}
+
+div.entry-overview p {
+  margin: 0;
+  padding: 0;
+}
+
+div.entry-overview div.date {
+  color: gray;
+}
+
+div.entry-overview div.detail div.summary {
+  margin: 1ex 0 0 0;
+  line-height: 24px;
+}
+
+div.entry-overview div.detail h1 {
+  margin: 0;
+}
+
+
+ul.blog-archive {
+  list-style: none;
+  padding: 0;
+}
+
+ul.blog-archive > li {
+  margin: 1ex 0;
+}
+
+div.content {
+  line-height: 29px;
+  font-size: 16px;
+}
+
+div.footer div.flattr {
+  text-align: right;
+}

@@ -1,0 +1,7 @@
+---
+active_modules: [pygments, tags, blog, latex]
+author: Thomas Gläßle
+canonical_url: http://www.coldfix.de
+modules:
+  pygments:
+    style: tango
