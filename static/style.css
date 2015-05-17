@@ -127,7 +127,7 @@ div.footer div.flattr {
 }
 
 .hll {
-  margin-bottom: 2.5ex;
+  margin: 1.8ex 0;
   border-radius: 5px;
 }
 
@@ -147,5 +147,22 @@ div.content tt.literal {
 }
 
 div.content div.section {
-  margin-bottom: 2ex;
+  margin: 3ex 0;
+}
+
+div.content h2 a.section-link {
+  font-weight: normal;
+  visibility: hidden;
+  margin-left: 0.2em;
+}
+
+div.content h2:hover a.section-link {
+  color: #dddddd;
+  visibility: visible;
+}
+
+div.content h2:hover a.section-link:hover {
+  color: red;
+  background-color: #dddddd;
+  visibility: visible;
 }
