@@ -3,6 +3,14 @@ active_modules: [pygments, tags, blog, latex]
 author: Thomas Gläßle
 blogtitle: "cat /dev/brain |"
 canonical_url: http://www.coldfix.de
+ignore_files:
+  - '.*'
+  - '_*'
+  - '*.conf'
+  - 'config.yml'
+  - 'Makefile'
+  - 'README.rst'
+  - 'LICENSE.rst'
 modules:
   pygments:
     style: monokai

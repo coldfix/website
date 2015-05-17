@@ -22,6 +22,8 @@ to persue me legally, this is how I am known to the authorities:
 Of course, the above address can also be used as write-only cache for
 fabulous every-day presents *wink*.
 
+.. include:: LICENSE.rst
+
 This site was generated using blogdown_, a fork of rstblog_.
 
 .. _HIT: http://www.klinikum.uni-heidelberg.de/hit
