@@ -129,10 +129,9 @@ important parts of this file are outlined below:
 
     // Tell flex which function to define
     # undef YY_DECL
-    # define YY_DECL                                \
-        int yy::scanner::lex(                       \
-                yy::parser::semantic_type* yylval,  \
-                yy::parser::location_type* yylloc)
+    # define YY_DECL        int yy::scanner::lex(                   \
+                                yy::parser::semantic_type* yylval,  \
+                                yy::parser::location_type* yylloc)
 
 
     namespace yy
@@ -150,19 +149,16 @@ important parts of this file are outlined below:
     #endif // include-guard
 
 By the way, I use the extensions ``.hpp`` versus ``.hxx`` to distinguish
-handcrafted header files from generated headers. Anologously, the extensions
+handcrafted header files from generated ones. Anologously, the extensions
 ``.cpp`` and ``.cxx`` are used for source files.
 
-The tokenizer itself is defined in the file ``scanner.l`` which consists
-of `three sections`_ separated by a ``%%``.
+The tokenizer itself is defined in the file ``scanner.l`` which consists of
+`three sections`_ separated by a ``%%``. The first section can be used to
+set `Flex options`_. It can also contain code blocks that will be inserted
+near the top of the generated ``.cxx`` file. This is useful to define
+convenience macros for the lexer actions in the second section.
 
 .. _three sections: http://flex.sourceforge.net/manual/Format.html
-
-The first section can be used to set `Flex options`_. It can also contain
-code blocks that will be inserted near the top of the generated ``.cxx``
-file. This is useful to define convenience macros for the lexer actions in
-the second section.
-
 .. _Flex options: http://flex.sourceforge.net/manual/Scanner-Options.html
 
 .. code-block:: c++
@@ -270,9 +266,9 @@ Before we dive into the parser, let's have a short look at our AST. Again,
 you can safely ignore the details. Just note that I prefer to work with
 simple structs and standard library containers as opposed to classes with
 virtual methods. This means that I get automatic support for initializer
-lists and that my data is easy to keep on the stack without requiring
+lists and that the data is easy to keep on the stack without requiring
 pointer semantics. If you somewhere do need polymorphic behaviour, I
-recommend to a smart pointer such as `std::shared_ptr`_.
+recommend to use a smart pointer such as `std::shared_ptr`_.
 
 .. _`std::shared_ptr`: http://en.cppreference.com/w/cpp/memory/shared_ptr
 
@@ -363,14 +359,14 @@ Bison to generate a class with the following interface:
     namespace yy {
         class parser {
         public:
-            parser(yy::scanner*, ParserCallback*);
+            parser(yy::scanner* input, ParserOutput* output);
             int parse();
         };
     }
 
-The callback is a simple interface to return results. The scanner argument
-is used to retrieve a stream of tokens by calling its ``lex`` method
-repeatedly.
+The output callback is a simple interface to return results. The scanner
+argument is used to retrieve a stream of tokens by calling its ``lex``
+method repeatedly.
 
 The Bison parser is defined in the file ``bison.y``. This file is
 structured similar to the Flex file discussed above: It has three sections
@@ -386,10 +382,14 @@ setting `parser options`_:
 
     /* C++ parser interface */
     %skeleton "lalr1.cc"
+
+    /* require bison version */
     %require  "3.0"
 
-    /* add parser members (scanner, cb) and yylex parameters (loc, scanner) */
-    %parse-param  {yy::scanner* scanner} {ParserCallback* cb}
+    /* add parser members */
+    %parse-param  {yy::scanner* scanner} {ParserOutput* cb}
+
+    /* call yylex with a location */
     %locations
 
     /* increase usefulness of error messages */
@@ -454,14 +454,14 @@ the generated source file and/or header file:
         };
 
         // results
-        struct ParserCallback {
+        struct ParserOutput {
             virtual void relation(ast::Relation) = 0;
             virtual void markov_chain(ast::MarkovChain) = 0;
             virtual void mutual_independence(ast::MutualIndependence) = 0;
             virtual void function_of(ast::FunctionOf) = 0;
         };
 
-        void parse(const std::vector<std::string>&, ParserCallback*);
+        void parse(const std::vector<std::string>&, ParserOutput*);
     }
 
     /* inserted near top of source file */
@@ -475,9 +475,7 @@ the generated source file and/or header file:
 
         using std::move;
 
-        #ifdef  yylex
-        # undef yylex
-        #endif
+        #undef yylex
         #define yylex scanner->lex
 
         // utility function to append a list element to a std::vector
@@ -579,7 +577,7 @@ right place to implement additional methods.
     }
 
     // Example how to use the parser to parse a vector of lines:
-    void parse(const std::vector<std::string>& exprs, ParserCallback* out)
+    void parse(const std::vector<std::string>& exprs, ParserOutput* out)
     {
         for (int row = 0; row < exprs.size(); ++row) {
             const std::string& line = exprs[row];
@@ -609,7 +607,7 @@ right place to implement additional methods.
         }
     }
 
-All that remains to do now is to implement ``ParserCallback`` handlers and
+All that remains to do now is to implement ``ParserOutput`` handlers and
 the actual user code.
 
 When compiling your program with g++, don't forget to add the
@@ -626,12 +624,12 @@ When compiling your program with g++, don't forget to add the
 Conclusion
 ~~~~~~~~~~
 
-Even though Flex and Bison are extremely old tools that may seem quirky at
-first, their widespread availability makes them the tool of choice for many
+Even though Flex and Bison are old tools that may seem quirky at first,
+their widespread availability makes them the tool of choice for many
 applications.
 
 Although, I'm still not *entirely* satisfied in every aspect, the result is
-much better than what could have been achieved with any of the other C++
+probably much better than what could have been achieved with the other C++
 parser generators I considered when looking for alternatives.
 
 This shows that both tools are indeed carefully designed, adapt well and

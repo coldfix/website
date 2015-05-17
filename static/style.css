@@ -126,6 +126,11 @@ div.footer div.flattr {
   text-align: right;
 }
 
+.hll {
+  margin-bottom: 2.5ex;
+  border-radius: 5px;
+}
+
 .hll pre {
   padding: 10px;
   line-height: normal;
@@ -134,4 +139,13 @@ div.footer div.flattr {
 
 div.hll .cp {
   color: #995599;
+}
+
+div.content tt.literal {
+  background-color: #f3f3f3;
+  border-radius: 4px;
+}
+
+div.content div.section {
+  margin-bottom: 2ex;
 }
