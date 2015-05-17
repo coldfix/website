@@ -33,7 +33,7 @@ A bit of context
 Recently, I forked a small tool to check if an inequality is a Shannon-type
 inequality. I wanted to make a few minor modifications. However, the parser
 component was written so poorly that it was nearly impossible to understand
-let alone modify:
+let alone modify. These are some of the problems in the original code base:
 
 - Bison and Flex were used in the default mode in which all the arguments
   are communicated as global variables. This was not really a problem but
@@ -50,13 +50,18 @@ let alone modify:
   state machine which I still haven't understood as of today.
 
 - There was a Flex module that wasn't even used to break the textual input
-  down into a stream of tokens but rather for some sort of weird and
-  completely pointless preprocessing. This resulted in the original authors
-  having to write ridiculous amounts of code to recognize identifiers in the
-  Bison code.
+  down into a stream of tokens but rather for some sort of weird
+  preprocessing. This resulted in the necessity for lots of (fragile!) code
+  to recognize identifiers in the Bison code.
 
-- There were a number of additional abominations unrelated to the design
-  principles of the parser itself.
+- There were a number of additional issues that I'm not going to explain in
+  detail.
+
+Don't get me wrong — I do appreciate very much the work done by the original
+authors and that they released it under a free license. This gave me a basis
+point to start from and compare to. Apparently, they did not have the time
+to clean up their code, but they created something and published it. That's
+great!
 
 At the time I did not know that Bison and Flex can also be used in a more
 modern fashion and so I initially hesitated to do any fundamental
