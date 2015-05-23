@@ -8,91 +8,19 @@ summary: |
 Feeding a Bison with tasty C++11 grAST!
 =======================================
 
-In this post I am going to explain how to write a parser in idiomatic C++
+In this post I am going to demonstrate how to write a parser in concise C++
 using Bison_ and Flex_. The parser outputs an AST (abstract syntax tree) in
-simple C++ data structures. The main focus of this technique is to avoid
-boilerplate code and repetition and to keep the parsing and semantic
-analysis stages separate. The design principles are strongly influenced by
-the `UNIX philosophy`_ and the `Zen of Python`_. This example also
-demonstrates how to use location tracking in order to improve the usefulness
-of error messages. If you are looking to get the most performance out of
-your parser, however, this post is not for you.
+simple C++ data structures. My main focus is to avoid overly verbose code
+and to keep the parsing and semantic analysis stages separate. The example
+code also tracks location in order to improve the usefulness of error
+messages. If you are looking to get the most performance out of your
+parser, however, this post is not for you.
 
 For a live version of this code see my citip_ git repository.
 
 .. _Bison: http://www.gnu.org/software/bison/manual/
 .. _Flex: http://flex.sourceforge.net/
-.. _UNIX philosophy: http://en.wikipedia.org/wiki/Unix_philosophy
-.. _Zen of Python: https://www.python.org/dev/peps/pep-0020/
 .. _citip: https://github.com/coldfix/Citip
-
-
-A bit of context
-~~~~~~~~~~~~~~~~
-
-Recently, I forked a small tool to check if an inequality is a Shannon-type
-inequality. I wanted to make a few minor modifications. However, the parser
-component was written so poorly that it was nearly impossible to understand
-let alone modify. These are some of the problems in the original code base:
-
-- Bison and Flex were used in the default mode in which all the arguments
-  are communicated as global variables. This was not really a problem but
-  being used to object oriented or functional design principles, it still
-  pained me to see.
-
-- The parser immediately transformed the input to an effective data format
-  by computing parts of the input expressions and thus removing information
-  that would be needed to later use the input in a different way.
-  Furthermore, this had the effect of decreasing readability and mangling
-  the semantic analysis with the lower level parsing stage.
-
-- The aforementioned input transformation was implemented as a confusing
-  state machine which I still haven't understood as of today.
-
-- There was a Flex module that wasn't even used to break the textual input
-  down into a stream of tokens but rather for some sort of weird
-  preprocessing. This resulted in the necessity for lots of (fragile!) code
-  to recognize identifiers in the Bison code.
-
-- There were a number of additional issues that I'm not going to explain in
-  detail.
-
-Don't get me wrong — I do appreciate very much the work done by the original
-authors and that they released it under a free license. This gave me a basis
-point to start from and compare to. Apparently, they did not have the time
-to clean up their code, but they created something and published it. That's
-great!
-
-At the time I did not know that Bison and Flex can also be used in a more
-modern fashion and so I initially hesitated to do any fundamental
-modifications. But later I decided to rewrite the entire component to keep
-my mind at ease. This time I wanted the parser comply with some constraints:
-
-- *Thread safety* — All state should be kept as local variables and
-  communicated via function arguments and return values.
-
-- *Modularity* — The parser should have only one purpose, and that is to
-  parse the user input into equivalent C++ objects. Various computations
-  can then be done in independent subsequent steps.
-
-- *Simplicity* — In particular, do not keep one or more state variables
-  that are used determine which code branch to use later on.
-
-- *Composition* — Use Flex to break the input stream into tokens.
-
-- You can add most of the remaining UNIX principles to this list. Almost
-  all of them were heavily violated in some form or the other in the
-  original program code.
-
-I looked up a_ few_ examples_ on the web for using Bison with C++. None of
-those I found completely satisfactory — which is why I'm writing this blog
-post today.
-
-.. _a: http://www.progtools.org/compilers/tutorials/cxx_and_bison/cxx_and_bison.html
-.. _few: https://panthema.net/2007/flex-bison-cpp-example/
-.. _examples: http://gnuu.org/2009/09/18/writing-your-own-toy-compiler/
-
-Enough of this, let's see some actual code.
 
 
 Tokenizer
@@ -101,9 +29,12 @@ Tokenizer
 Flex supports thread-safe interfaces (Flex jargon — *reentrant*) in plain C
 as well as C++. Although dubbed experimental, I settled for the C++ API.
 The advantage of the `Flex C++ API`_ over its `reentrant C counterpart`_ is
-that it allows to use standard stream objects and cleans itself up
-automatically. By default Flex generates the code for a class with a
-superset of the following interface:
+that it allows to use standard stream objects and performs automatic
+cleanup. By default Flex generates the code for a class with a superset of
+the following interface:
+
+.. _Flex C++ API: http://flex.sourceforge.net/manual/Cxx.html
+.. _reentrant C counterpart: http://flex.sourceforge.net/manual/Reentrant.html
 
 .. code-block:: c++
 
@@ -113,15 +44,15 @@ superset of the following interface:
         int yylex();
     };
 
-.. _Flex C++ API: http://flex.sourceforge.net/manual/Cxx.html
-.. _reentrant C counterpart: http://flex.sourceforge.net/manual/Reentrant.html
-
-
-In order to feed data back to Bison, we must provide a replacement for the
-``yylex`` method that accepts parameters for value and location. The easiest
-way to do this is to derive a scanner class that provides a method with the
-desired signature. We do this in a header file called ``scanner.hpp``. The
-important parts of this file are outlined below:
+This is the interface of a stream editor: on each call to ``yylex`` the
+scanner reads from its input and writes to its output stream and returns a
+status code. However, we don't want to write to an output stream — a Bison
+needs to be fed. Therefore, we must provide a replacement for the ``yylex``
+method that accepts parameters for value and location. We can't just change
+the class ``yyFlexLexer`` which is defined in a system header. What we can
+do is to derive a scanner class that provides a method with the desired
+signature. The class is declared in a header file called ``scanner.hpp``
+which looks as follows:
 
 .. code-block:: c++
 
