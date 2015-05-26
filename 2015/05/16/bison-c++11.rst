@@ -304,7 +304,7 @@ The output callback is a simple interface to return results. The scanner
 argument is used to retrieve a stream of tokens by calling its ``lex``
 method repeatedly.
 
-The Bison parser is defined in the file ``bison.y``. This file is
+The Bison parser is defined in the file ``parser.y``. This file is
 structured similar to the Flex file discussed above: It has three sections
 separated by ``%%``. The first section has multiple purposes. We start by
 setting `parser options`_:
@@ -553,8 +553,8 @@ When compiling your program with g++, don't forget to add the
 
     flex scanner.l
     bison parser.y
-    g++ scanner.cxx -std=c++11
-    g++ parser.cxx -std=c++11
+    g++ -c scanner.cxx -std=c++11
+    g++ -c parser.cxx -std=c++11
 
 
 Conclusion
@@ -564,7 +564,7 @@ Even though Flex and Bison are old tools that may seem quirky at first,
 their widespread availability makes them the tool of choice for many
 applications.
 
-Although, I'm still not *entirely* satisfied in every aspect, the result is
+Although I'm still not *entirely* satisfied in every aspect, the result is
 probably much better than what could have been achieved with the other C++
 parser generators I considered when looking for alternatives.
 
