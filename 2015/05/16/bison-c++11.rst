@@ -51,10 +51,11 @@ needs to be fed. Therefore, we must provide a replacement for the ``yylex``
 method that accepts parameters for value and location. We can't just change
 the class ``yyFlexLexer`` which is defined in a system header. What we can
 do is to derive a scanner class that provides a method with the desired
-signature. The class is declared in a header file called ``scanner.hpp``
-which looks as follows:
+signature:
 
 .. code-block:: c++
+    :caption: scanner.hpp
+    :linenos:
 
     #ifndef __SCANNER_HPP__INCLUDED__
     #define __SCANNER_HPP__INCLUDED__
@@ -88,7 +89,7 @@ By the way, I use the extensions ``.hpp`` versus ``.hxx`` to distinguish
 handcrafted header files from generated ones. Anologously, the extensions
 ``.cpp`` and ``.cxx`` are used for source files.
 
-The tokenizer itself is defined in the file ``scanner.l`` which consists of
+The tokenizer itself is defined in a ``.l`` flex source file which consists of
 `three sections`_ separated by a ``%%``. The first section can be used to
 set `Flex options`_. It can also contain code blocks that will be inserted
 near the top of the generated ``.cxx`` file. This is useful to define
@@ -98,6 +99,9 @@ convenience macros for the lexer actions in the second section.
 .. _Flex options: http://flex.sourceforge.net/manual/Scanner-Options.html
 
 .. code-block:: c++
+    :caption: scanner.l
+    :linenos:
+    :lineno-start: 1
 
     %option     outfile="scanner.cxx"
     %option header-file="scanner.hxx"
@@ -140,6 +144,9 @@ application, this section looks as follows:
 .. _patterns: http://flex.sourceforge.net/manual/Patterns.html
 
 .. code-block:: c++
+    :caption: scanner.l
+    :linenos:
+    :lineno-start: 33
 
     %{
         // before matching any pattern, update the the current location
@@ -178,6 +185,9 @@ The final section can contain arbitrary code. This is the perfect place to
 implement methods of our scanner class.
 
 .. code-block:: c++
+    :caption: scanner.l
+    :linenos:
+    :lineno-start: 64
 
     yy::scanner::scanner(std::istream* in, std::ostream* out)
         : yyFlexLexer(in, out)
@@ -198,19 +208,11 @@ implement methods of our scanner class.
 AST
 ~~~
 
-Before we dive into the parser, let's have a short look at our AST. Again,
-you can safely ignore the details. Just note that I prefer to work with
-simple structs and standard library containers as opposed to classes with
-virtual methods. This means that I get automatic support for initializer
-lists and that the data is easy to keep on the stack without requiring
-pointer semantics. If you somewhere do need polymorphic behaviour, I
-recommend to use a smart pointer such as `std::shared_ptr`_.
-
-.. _`std::shared_ptr`: http://en.cppreference.com/w/cpp/memory/shared_ptr
-
-These are the contents of the file ``ast.hpp``:
+Before we dive into the parser, let's have a short look at our AST:
 
 .. code-block:: c++
+    :caption: ast.hpp
+    :linenos:
 
     #ifndef __AST_HPP__INCLUDED__
     #define __AST_HPP__INCLUDED__
@@ -274,6 +276,15 @@ These are the contents of the file ``ast.hpp``:
 
     #endif // include-guard
 
+Again, you can safely ignore the details. Just note that I prefer to work
+with simple structs and standard library containers as opposed to classes
+with virtual methods. This means that I get automatic support for
+initializer lists and that the data is easy to keep on the stack without
+requiring pointer semantics. If you somewhere do need polymorphic
+behaviour, I recommend to use a smart pointer such as `std::shared_ptr`_.
+
+.. _`std::shared_ptr`: http://en.cppreference.com/w/cpp/memory/shared_ptr
+
 
 Parser
 ~~~~~~
@@ -304,7 +315,7 @@ The output callback is a simple interface to return results. The scanner
 argument is used to retrieve a stream of tokens by calling its ``lex``
 method repeatedly.
 
-The Bison parser is defined in the file ``parser.y``. This file is
+The Bison parser is defined in a ``.y`` bison source file. This file is
 structured similar to the Flex file discussed above: It has three sections
 separated by ``%%``. The first section has multiple purposes. We start by
 setting `parser options`_:
@@ -312,6 +323,9 @@ setting `parser options`_:
 .. _parser options: http://www.gnu.org/software/bison/manual/bison.html#Declarations
 
 .. code-block:: c++
+    :caption: parser.y
+    :linenos:
+    :lineno-start: 1
 
     %output  "parser.cxx"
     %defines "parser.hxx"
@@ -349,6 +363,9 @@ The next step is to define tokens and semantic value types, i.e. associate
 the value of rules with data structures of our AST:
 
 .. code-block:: c++
+    :caption: parser.y
+    :linenos:
+    :lineno-start: 24
 
     %token                  END     0   "end of file"
 
@@ -376,6 +393,9 @@ We also need this section to define code sections that will be prepended to
 the generated source file and/or header file:
 
 .. code-block:: c++
+    :caption: parser.y
+    :linenos:
+    :lineno-start: 44
 
     /* inserted near top of header + source file */
     %code requires {
@@ -432,6 +452,9 @@ simplicity of the grammar actions show the true power of using simple AST
 data types.
 
 .. code-block:: c++
+    :caption: parser.y
+    :linenos:
+    :lineno-start: 91
 
         /* deliver output */
 
@@ -506,6 +529,9 @@ section that will be appended literally to the generated source. It is the
 right place to implement additional methods.
 
 .. code-block:: c++
+    :caption: parser.y
+    :linenos:
+    :lineno-start: 153
 
     void yy::parser::error(const parser::location_type& l, const std::string& m)
     {

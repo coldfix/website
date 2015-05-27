@@ -15,7 +15,7 @@ a {
   text-decoration: none;
 }
 
-div.container {
+#container {
   max-width: 45em;
   margin: 1ex auto;
 	border: thin solid white;
@@ -126,15 +126,72 @@ div.footer div.flattr {
   text-align: right;
 }
 
-.hll {
-  margin: 1.8ex 0;
-  border-radius: 5px;
-}
-
-.hll pre {
-  padding: 10px;
+.literal-block-wrapper {
   line-height: normal;
   font-size: 13px;
+  padding: 0;
+  width: 100%;
+  margin: 1.8ex 0;
+}
+
+.literal-block-wrapper .caption, .hlltable, .hll {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.literal-block-wrapper .caption {
+  background-color: #333333;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding: 5px;
+  padding-left: 10px;
+  color: white;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.hlltable {
+  border-spacing: 0;
+  border-collapse: collapse;
+  position: relative;
+}
+
+.hlltable td.linenos, .hlltable td.code {
+  margin: 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.hlltable td.linenos {
+  color: silver;
+  border-bottom-left-radius: 5px;
+  margin-left: -50px;
+  width: 50px;
+  text-align: right;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.hlltable td.code {
+  width: 100%;
+}
+
+.literal-block-wrapper .linenos pre,
+.literal-block-wrapper .hll pre {
+  padding: 10px;
+  margin: 0;
+}
+
+.hll {
+  border-top: 0;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.without_caption .hll {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 div.hll .cp {
