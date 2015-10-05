@@ -10,8 +10,8 @@ student, dethusiast programmer and free software cultist — yes, I actually
 have a robe to perform sacraficial rituals.
 
 As you might have already noticed I am utterly clueless about design and
-typography. In case this website makes your eyes cringe you are you are
-welcome to send me your well-meaning suggestions.
+typography. In case this website makes your eyes cringe you are welcome to
+send me your well-meaning suggestions.
 
 The best way to reach me is via email_ or github_. Though, in case you want to
 persue me legally (eye cancer?), this is how I am known to the authorities:
