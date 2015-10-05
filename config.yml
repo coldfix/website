@@ -13,6 +13,7 @@ ignore_files:
   - 'Makefile'
   - 'README.rst'
   - 'LICENSE.rst'
+  - 'TODO'
 modules:
   pygments:
     style: monokai
