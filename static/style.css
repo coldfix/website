@@ -127,11 +127,16 @@ div.footer div.flattr {
 }
 
 .literal-block-wrapper {
-  line-height: normal;
-  font-size: 13px;
   padding: 0;
   width: 100%;
   margin: 1.8ex 0;
+}
+
+.literal-block-wrapper, .literal-block-wrapper pre {
+  line-height: normal;
+  font-size: 13px;
+  font-family: "Deja Vu Sans Mono", "Source Code Pro";
+  font-family: "Source Code Pro", "Consolas", "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", "Monaco", "Courier New", "monospace";
 }
 
 .literal-block-wrapper .caption, .hlltable, .hll {
