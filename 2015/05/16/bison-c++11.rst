@@ -1,5 +1,5 @@
 public: yes
-tags: [c++, bison, flex, parsing]
+tags: [c++, bison, flex, parsing, programming]
 summary: |
   How to use Bison with C++11 to parse ASTs into your preferred data
   structures while keeping the parser module as concise and simple as
