@@ -74,6 +74,10 @@ div.content {
   margin-top: 3ex;
 }
 
+div.content h1.title {
+  text-align: center;
+}
+
 div.content > p.date {
   margin: 2.5ex 0;
   padding: 1ex 0;
