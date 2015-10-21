@@ -26,7 +26,7 @@ class ColumnInfo(object):
                  width=wx.LIST_AUTOSIZE):
         """
         :param str title: column title
-        :param callable gettext: (index, item) -> str
+        :param callable gettext: formatter function item -> str
         :param int format: format argument for InsertColumn
         :param int width: width argument for InsertColumn
         """
@@ -350,7 +350,7 @@ class ListCtrl(wx.ListCtrl, ListCtrlAutoWidthMixin, ListCtrlUtil):
 
     def OnGetItemText(self, row, col):
         """Get the text for the specified row/col."""
-        return self._columns[col].gettext(row, self._items[row])
+        return self._columns[col].gettext(self._items[row])
 
     # The following methods are usually only implemented by LC_VIRTUAL list
     # controls. We provide overrides that are useful for non-virtual controls

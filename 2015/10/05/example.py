@@ -21,15 +21,15 @@ class Dialog(wx.Dialog):
     Columns = [
         ColumnInfo(
             "Name",
-            lambda idx, person: person.name,
+            lambda person: person.name,
             wx.LIST_FORMAT_LEFT),
         ColumnInfo(
             "Erdős",
-            lambda idx, person: person.erdos_number,
+            lambda person: person.erdos_number,
             wx.LIST_FORMAT_RIGHT),
         ColumnInfo(
             "Haircut",
-            lambda idx, person: person.haircut,
+            lambda person: person.haircut,
             wx.LIST_FORMAT_LEFT),
     ]
 
