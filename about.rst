@@ -17,8 +17,8 @@ The best way to reach me is via email_ or github_. Though, in case you want to
 persue me legally (eye cancer?), this is how I am known to the authorities:
 
     | Thomas Gläßle
-    | Kaiser-Joseph-Str. 234
-    | 79098 Freiburg im Breisgau
+    | Schlüsselweg 39
+    | 69221 Dossenheim
     | — Germany
 
 Of course, the above address can also be used as write-only cache to store
