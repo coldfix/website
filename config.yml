@@ -18,4 +18,8 @@ modules:
   pygments:
     style: monokai
 
+feed:
+  name: Coder Gone Mad
+  subtitle: Tails of Code Gone Bad
+
 flattr_id: Kanarienmaus
