@@ -227,8 +227,10 @@ consider them reasonable default settings. For example:
     [HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization]
     "NoLockScreen"=dword:00000001
 
-- It's the 21st century, why do we still have CAPS LOCK? I want it to be
-  *Escape* for vim, but on windows im happy to just disable it for now using
+- It's the 21st century, why do we still have CAPS LOCK? On linux I set it to
+  *Escape* for more convenient *vim*-editing, but on windows I'm happy to
+  remap it to *ScrollLock* to make it useful as a hotkey for PushToTalk or to
+  enable/disable the microphone in mumble or teamspeak.
   SwitchCapsToScrollLock.reg_:
 
 .. code-block:: registry
