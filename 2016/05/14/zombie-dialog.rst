@@ -1,5 +1,5 @@
 public: yes
-tags: [programming, bug, debugging, python, gui, zombie]
+tags: [programming, bug, debugging, python, gui, zombie, refcount]
 summary: |
   Fun with bugs - a story about zombie dialogs.
 
