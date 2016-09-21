@@ -238,7 +238,7 @@ consider them reasonable default settings. For example:
     Windows Registry Editor Version 5.00
 
     [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Keyboard Layout]
-    "Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,00,00,3a,00,3A,00,46,00,00,00,00,00
+    "Scancode Map"=hex:00,00,00,00,00,00,00,00,02,00,00,00,46,00,3a,00,00,00,00,00
 
 
 - The most useful icon in the notification area for me is the one with which
