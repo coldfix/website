@@ -3,10 +3,10 @@ public: yes
 Misc
 ====
 
-A few subdomains on this server:
+Shameless self-advertisements:
 
 - jabber/XMPP: server running on *coldfix.de*. Please, feel free to make
-  accounts (uses SCRAM_, so I won't get your password)
+  accounts (this service uses SCRAM_, so I won't get your password)
 - gogs.coldfix.de_: make yourself some free private git repositories
 - sudoku.coldfix.de_: just because I had already coded the generator when I was in school
 
