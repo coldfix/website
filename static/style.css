@@ -15,6 +15,11 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: #007700;
+  text-decoration: underline;
+}
+
 #container {
   max-width: 45em;
   margin: 1ex auto;
