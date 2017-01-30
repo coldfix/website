@@ -154,6 +154,9 @@ command as follows:
 
     compdef _precommand vpnbox
 
+As a further convenience, you can modify the ``vpnbox`` command to start the
+VPN (if not already running) before executing the user-requested command.
+
 passwords are for nerds
 -----------------------
 
@@ -291,16 +294,15 @@ Reference:
     https://snikt.net/blog/2013/10/10/how-to-force-program-to-use-vpn-tunnel/
 
 
-Start applications with special user/group
-------------------------------------------
+Start applications with dedicated user/group
+--------------------------------------------
 
 A_ commonly_ suggested_ possibility_ is to create a special user or group and
 create firewall rules that will route all traffic of the user using a
 dedicated routing table.
 
-**WARNING:** The implementation presented here (and all I found on other
-sites) will leak traffic when your VPN goes down. This can be avoided using
-more sophisticated iptables rules, but I did not bother implementing them.
+**WARNING:** I deem this method unsafe and advise against using it. For more
+details, see the end of the section.
 
 .. _A: http://askubuntu.com/questions/37412/how-can-i-ensure-transmission-traffic-uses-a-vpn
 .. _commonly: https://forums.linuxmint.com/viewtopic.php?t=175765
@@ -347,20 +349,47 @@ And place the setup-for-group.sh_ script in your openvpn folder:
 
     #! /bin/bash
 
+    # NOTE: If you have iptable rules, do NOT blindly do any of the following.
+    # You must take care manually that the rule sets do not interfere.
+
     up() {
+        # Enable forwarding, see:
+        # https://www.kernel.org/doc/Documentation/networking/ip-sysctl.txt
         echo 1 > /proc/sys/net/ipv4/ip_forward
         for f in /proc/sys/net/ipv4/conf/*/rp_filter; do
-            echo 0 > $f
+            echo 2 > $f
         done;
+
+        # Avoid duplicate rules and emphasize that we are probably not compatible
+        # with other iptable rules:
+        false && delete_rules
+        # Just kidding, we are not actually doing this. This would temporarily
+        # disable rules for already running programs.
 
         # Mark packets coming from the vpn group
         iptables -t mangle -A OUTPUT -m owner --gid-owner vpn -j MARK --set-mark 42
 
-        ## Apply the VPN IP address on outgoing packages
+        # Apply the VPN IP address on outgoing packages
         iptables -t nat -A POSTROUTING -o "$dev" -m mark --mark 42 -j MASQUERADE
 
         # Route marked packets via VPN table
         ip rule add fwmark 42 table vpn
+
+        #----------------------------------------
+        # security measures against leaking traffic on other interfaces:
+        #----------------------------------------
+
+        # If the routing table contains no routes, the next matching table can be
+        # used - which can result in packages being routed over other interfaces.
+        # To prevent this from happening, add a dummy entry that will keep the
+        # table alive before its default route is setup and after it goes down:
+        ip route add unreachable 0.0.0.0/32 table vpn
+
+        # Fallback measures in case the above is insufficient: establish iptables
+        # rules that will prevent traffic going on other interfaces:
+        iptables -t mangle -A POSTROUTING -m mark --mark 42 -o lo     -j RETURN
+        iptables -t mangle -A POSTROUTING -m mark --mark 42 -o "$dev" -j RETURN
+        iptables -t mangle -A POSTROUTING -m mark --mark 42           -j DROP
     }
 
     route-up() {
@@ -368,15 +397,25 @@ And place the setup-for-group.sh_ script in your openvpn folder:
     }
 
     down() {
-        iptables -t mangle -F
-        iptables -t nat -F
+        # NOTE: do not delete the ip/iptables rules to decrease the likelihood of
+        # data leaks
+        true;
+    }
+
+    # This is how you can clear the rules, if you want to. This will not be
+    # executed automatically.
+    delete_rules() {
+        iptables -t mangle -F OUTPUT
+        iptables -t mangle -F POSTROUTING
+        iptables -t nat    -F POSTROUTING
         ip rule del fwmark 42 table vpn
+        ip route del 0.0.0.0 table vpn
         ip route del default table vpn
     }
 
     "$script_type" "$@"
 
-    update DNS servers
+    # update DNS servers
     if [ -x /etc/openvpn/update-resolv-conf ]; then
         /etc/openvpn/update-resolv-conf "$@"
     fi
@@ -403,6 +442,19 @@ the following
 
 This allows the user *alice* to start applications with group *vpn* without
 having to enter her password.
+
+**WARNING:** This method can leak traffic if for some reason the routing
+table/iptable rules are ineffective, e.g.:
+
+- some unforseen edge-case is not covered
+- one or more of the rules is deleted (playing with your firewall?)
+- other rules interfere
+- before the rules are created
+
+To emphasize: Before the rules are in effect there is no protection at all.
+The implementation given here sets up the rules after starting the VPN rather
+than at system boot, which means that programs will happily communicate over
+the default interface until the VPN is first started.
 
 
 Virtual ethernet tunnel to network namespace
@@ -435,7 +487,7 @@ However, unlike for the `Recommended solution`_, these methods do also
 establish principal a connection for all applications to both the plain
 network and the VPN — which means that it is possible to simultaneously
 support the two alternative methods (`Configure application to use VPN
-tunnel`_, `Start applications with special user/group`_) described in the
+tunnel`_, `Start applications with dedicated user/group`_) described in the
 previous sections.
 
 Be aware that these options offer little benefit compared with the recommended
