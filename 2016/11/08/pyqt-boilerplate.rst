@@ -1,5 +1,5 @@
 public: yes
-tags: [programming, gui, python, pyqt]
+tags: [programming, gui, python, pyqt, gist]
 summary: |
   Boilerplate for dealing with common scenarios such as exceptions and
   KeyboardInterrupts (Ctrl-C) in PyQt{4,5} applications.

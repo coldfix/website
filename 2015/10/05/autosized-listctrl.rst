@@ -1,5 +1,5 @@
 public: yes
-tags: [python, wx, listctrl, gui, programming]
+tags: [python, wx, listctrl, gui, programming, gist]
 summary: |
   A ListCtrl subclass for wxPython that autosizes columns to their minimal
   size requirements.
