@@ -1,4 +1,4 @@
-public: no
+public: yes
 tags: [lua, wat, quirks]
 summary: |
   Why lua is the greatest language in the world: variadic functions and
@@ -39,14 +39,15 @@ Yet another name for NULL
 -------------------------
 
 God spoke: *Every language shalt have their own slightly different NULL
-semantics and a different name.*
+thingy.*
 
 And so it was:
 
 - C: ``NULL``
+- C++: ``nullptr``
 - perl: ``undef``
-- javascript: ``undefined`` / ``null``
 - python: ``None``
+- javascript: ``undefined`` / ``null``
 - lua: ``nil``
 
 Great error-safety!
@@ -81,7 +82,8 @@ worries:
     foo
 
 Tired of keeping track of variable names? Need automatic spelling correction?
-Lua does it for you:
+Lua does it for you (but for now it works only for variables refering to
+``nil`` values):
 
 .. code-block:: lua
 
