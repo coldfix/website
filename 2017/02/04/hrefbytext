@@ -1,0 +1,28 @@
+#! /usr/bin/env python
+# encoding: utf-8
+
+"""
+Get link by text content.
+
+Usage:
+    hrefbytext URL TEXT
+
+Example:
+    hrefbytext "http://ctan.org/pkg/subcaption" "Pack­age doc­u­men­ta­tion"
+"""
+
+import sys
+from lxml.html import parse
+
+
+def main(args):
+    url = args[0]
+    doc = parse(url).getroot()
+    text = args[1]
+    for link in doc.cssselect('a'):
+        if link.text_content() == text:
+            print(link.get('href'))
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
