@@ -385,7 +385,7 @@ And place the setup-for-group.sh_ script in your openvpn folder:
         # table alive before its default route is setup and after it goes down:
         ip route add unreachable 0.0.0.0/32 table vpn
 
-        # Fallback measures in case the above is insufficient: establish iptables
+        # safeguard measure in case the above is insufficient: establish iptables
         # rules that will prevent traffic going on other interfaces:
         iptables -t mangle -A POSTROUTING -m mark --mark 42 -o lo     -j RETURN
         iptables -t mangle -A POSTROUTING -m mark --mark 42 -o "$dev" -j RETURN
@@ -456,6 +456,9 @@ The implementation given here sets up the rules after starting the VPN rather
 than at system boot, which means that programs will happily communicate over
 the default interface until the VPN is first started.
 
+In fact, it would be much better to setup all static rules (i.e. everything
+done in the ``up()`` function except for the MASQUERADE rule) at system boot
+time rather than when the VPN starts.
 
 Virtual ethernet tunnel to network namespace
 --------------------------------------------
