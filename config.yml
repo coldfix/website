@@ -2,7 +2,7 @@
 active_modules: [pygments, tags, blog, latex, XresourcesLexer, disqus]
 author: Thomas Gläßle
 blogtitle: "cat /dev/brain |"
-canonical_url: http://www.coldfix.de
+canonical_url: https://www.coldfix.de
 ignore_files:
   - '.*'
   - '_*'
@@ -22,6 +22,6 @@ modules:
 
 feed:
   name: Coder Gone Mad
-  subtitle: Tails of Code Gone Bad
+  subtitle: Tales of Code Gone Bad
 
 flattr_id: Kanarienmaus
