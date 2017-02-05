@@ -1,4 +1,4 @@
-public: no
+public: yes
 tags: [config, tex, zsh, util, helper, gist]
 summary: |
   When you can't use texdoc…
