@@ -8,17 +8,18 @@ Usage:
     hrefbytext URL TEXT
 
 Example:
-    hrefbytext "http://ctan.org/pkg/subcaption" "Pack­age doc­u­men­ta­tion"
+    hrefbytext "http://ctan.org/pkg/subcaption" \
+               "Pack&shy;age doc&shy;u&shy;men&shy;ta&shy;tion"
 """
 
 import sys
-from lxml.html import parse
+from lxml.html import parse, fromstring
 
 
 def main(args):
     url = args[0]
     doc = parse(url).getroot()
-    text = args[1]
+    text = fromstring(args[1]).text_content()   # replace HTML entities
     for link in doc.cssselect('a'):
         if link.text_content() == text:
             print(link.get('href'))

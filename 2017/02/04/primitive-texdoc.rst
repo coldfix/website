@@ -9,25 +9,24 @@ ad-hoc texdoc
 Archlinux does not include documentation for tex packages. Therefore, native
 ``texdoc`` does not work:
 
-.. code-block:: zsh
+.. code-block:: bash
 
-    % texdoc siunitx 
+    % texdoc siunitx
     Sorry, no documentation found for siunitx.
     If you are unsure about the name, try searching CTAN's TeX catalogue at
     http://ctan.org/search.html#byDescription.
 
 Consider using this (very primitive) replacement for texdoc:
 
-.. code-block:: zsh
+.. code-block:: bash
     :caption: ~/.zshrc
-
-    #! /bin/zsh
 
     function texdoc
     {
         prefix=$HOME/.texdoc
         pkg=$1
-        doc=$(hrefbytext http://ctan.org/pkg/$pkg 'Pack­age doc­u­men­ta­tion') &&
+        doc=$(hrefbytext http://ctan.org/pkg/$pkg
+                         'Pack&shy;age doc&shy;u&shy;men&shy;ta&shy;tion') &&
         mkdir -p $prefix
         cache=$prefix/$(basename $doc) && (
         if [[ ! -e $cache ]]; then
@@ -58,17 +57,18 @@ and make it executable:
         hrefbytext URL TEXT
 
     Example:
-        hrefbytext "http://ctan.org/pkg/subcaption" "Pack­age doc­u­men­ta­tion"
+        hrefbytext "http://ctan.org/pkg/subcaption" \
+                   "Pack&shy;age doc&shy;u&shy;men&shy;ta&shy;tion"
     """
 
     import sys
-    from lxml.html import parse
+    from lxml.html import parse, fromstring
 
 
     def main(args):
         url = args[0]
         doc = parse(url).getroot()
-        text = args[1]
+        text = fromstring(args[1]).text_content()   # replace HTML entities
         for link in doc.cssselect('a'):
             if link.text_content() == text:
                 print(link.get('href'))
