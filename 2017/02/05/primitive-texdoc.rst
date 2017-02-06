@@ -9,7 +9,8 @@ ad-hoc texdoc
 Archlinux does not include documentation for tex packages. Therefore, native
 ``texdoc`` does not work:
 
-.. code-block:: bash
+.. code-block:: txt
+    :emphasize-lines: 1
 
     % texdoc siunitx
     Sorry, no documentation found for siunitx.
