@@ -17,6 +17,7 @@ particular order):
   datatype hell like the one in python where these things are in separate
   (utterly underpowered) container classes.
 - `Yet another name for NULL`_.
+- Yet another comment syntax: ``--``
 - Sieving of lazy developers who would like to make use of things like an
   extensive standard library. I really hate those.
 - `Relative imports`_ to keep us on our toes.
