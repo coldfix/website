@@ -14,6 +14,8 @@ ignore_files:
   - 'README.rst'
   - 'LICENSE.rst'
   - 'TODO'
+  - '*.aux'
+  - '*.log'
 modules:
   pygments:
     style: monokai

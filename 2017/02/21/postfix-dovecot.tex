@@ -1,0 +1,85 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{lmodern}	% font definition
+\usepackage{amsmath}	% math fonts
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+\usepackage{tikz}
+
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+
+\usetikzlibrary{fit}					% fitting shapes to coordinates
+\usetikzlibrary{backgrounds}	% drawing the background after the foreground
+\usetikzlibrary{calc}
+\usetikzlibrary{positioning}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shapes}
+\usepackage{tikz-3dplot}
+
+\tikzstyle{agent} = [draw, ellipse, thick, fill=blue!20,
+                     outer sep=3pt,
+                     inner sep=0.1cm,
+                     minimum size=1.2cm]
+
+\tikzstyle{service} = [draw, rectangle, thick, fill=blue!20,
+                       outer sep=3pt,
+                       minimum width=6em, minimum height=5ex]
+
+
+\tikzstyle{relation} = [draw, very thick, ->]
+
+\tikzstyle{overlay} = [fill=gray!15, inner sep=0.1cm, rounded corners=2mm]
+
+\tikzstyle{info} = [pos=0.5, sloped]
+\tikzstyle{extra} = [pos=0.5, sloped, font=\tiny]
+
+\begin{document}
+
+\begin{tikzpicture}[thick,scale=2]
+
+    \node[service] (postfix) at (0,  0)     {postfix};
+    \node[service] (dovecot) at (3,  0)     {dovecot};
+    \node[agent]   (user)    at (1.5, -1.6) {user};
+    \node[agent]   (www)     at (-3, 0)     {www};
+
+    \draw[relation,bend left=10] (postfix) to
+        node [info] (deliver) [above] {deliver local mail}
+        (dovecot);
+    \draw[relation,bend left=10] (dovecot) to
+        node [info] (authent) [below] {authenticate user}
+        (postfix);
+
+    % SMTP
+    \draw[relation] (user) to
+        node [info,anchor=north] {submit mail}
+        node [extra,anchor=south] {SMTP}
+        (postfix);
+
+    % IMAP/POP3
+    \draw[relation] (user) to
+        node [info,anchor=north] {access inbox}
+        node [extra,anchor=south] {IMAP/POP3}
+        (dovecot);
+
+    % mail delivery
+    \draw[relation,bend left=10] (www) to
+        node [info,anchor=south] {deliver mail}
+        (postfix);
+    \draw[relation,bend left=10] (postfix) to
+        node [info,anchor=north] {send mail}
+        (www);
+
+    \begin{pgfonlayer}{background}
+        \node[overlay, fit=(postfix) (dovecot) (deliver) (authent)] (server) {};
+    \end{pgfonlayer}
+
+\end{tikzpicture}
+
+\end{document}
