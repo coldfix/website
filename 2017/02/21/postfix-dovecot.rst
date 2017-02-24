@@ -74,8 +74,8 @@ There is a ton of guides out there on how to setup a mailserver using postfix
 and dovecot, so do I write yet another one?
 
 Truth is many of those guides didn't do too much explaining of the workings
-behind the shown configuration and so I on my own when trying to implement a
-variant according to my needs.
+behind the shown configuration and so I was still on my own when trying to
+implement a variant according to my needs.
 
 I will try to explain the things as I understood them and I hope to give some
 rationale why I did what I did. More importantly, I will point out where I
