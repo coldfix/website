@@ -8,6 +8,9 @@ VPN in a Nutshell
 
 Ever wanted to tunnel only specific applications through your VPN?
 
+**UPDATE:** Also consider my follow-up post `VPN
+autostart <../../../02/24/vpn-autostart/>`_.
+
 .. contents:: :local:
 
 Why you ask?
