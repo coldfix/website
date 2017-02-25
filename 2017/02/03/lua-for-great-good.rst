@@ -92,8 +92,8 @@ Lua does it for you (but for now it works only for variables refering to
     nil
 
 
-The good
---------
+To be fair
+----------
 
 Most of the above applause is not specific to lua. In many regards, lua is
 very similar to javascript_ and perl.

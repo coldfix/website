@@ -7,7 +7,7 @@ summary: |
 Reliable PyQt applications
 ==========================
 
-About four months ago, I transitioned from *wxWidgets* to *Qt* as my primary
+A few months ago, I transitioned from *wxWidgets* to *Qt* as my primary
 framework for writing GUI applications in python. In hindsight, this change
 was long overdue and I'm now very satisfied with heart-felt increase in power
 that Qt's widgets bring over those of wx. For the most part, the change was
@@ -16,6 +16,8 @@ things could go a little smoother, but nothing that can't be fixed. For
 serious applications, I recommend handling these scenarios. A simple piece of
 boilerplate such as the code below will do fine. I did not see these
 techniques advertised in PyQt tutorials or example code, hence the post.
+
+.. contents:: :local:
 
 PyQt{4,5} or PySide?
 ~~~~~~~~~~~~~~~~~~~~

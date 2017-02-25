@@ -11,6 +11,9 @@ me). I scheduled 2 hours to be done with all of it - what can go wrong, right?
 It turns out, I am either lacking the necessary IT skills, or installing
 windows is considerably more complicated than archlinux.
 
+.. contents:: :local:
+    :depth: 1
+
 
 The boot medium
 ~~~~~~~~~~~~~~~

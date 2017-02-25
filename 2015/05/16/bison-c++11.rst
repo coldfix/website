@@ -22,6 +22,8 @@ For a live version of this code see my citip_ git repository.
 .. _Flex: http://flex.sourceforge.net/
 .. _citip: https://github.com/coldfix/Citip
 
+.. contents:: :local:
+
 
 Tokenizer
 ~~~~~~~~~

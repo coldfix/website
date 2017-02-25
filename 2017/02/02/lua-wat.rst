@@ -169,7 +169,8 @@ And the corresponding output:
 Do not use *this*
 -----------------
 
-Note, please don't use this `bugged variant`_ of ``bind``:
+For the love of all that is good and descent, if you have any sanity left,
+please don't use this `bugged variant`_ of ``bind``:
 
 .. _bugged variant: ../bugged_bind.lua
 
@@ -209,7 +210,7 @@ Note, please don't use this `bugged variant`_ of ``bind``:
         end
     end
 
-which delivers completely unpredictable output such as this:
+It delivers completely unpredictable output such as this:
 
 .. code-block:: txt
 

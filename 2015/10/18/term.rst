@@ -14,6 +14,8 @@ client, web browser, text editor and even your terminal emulator. In fact,
 being able (*and forced to!*) freely assemble your system might be the reason
 to switch in the first place.
 
+.. contents:: :local:
+
 
 Which to use?
 ~~~~~~~~~~~~~
