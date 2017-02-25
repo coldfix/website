@@ -1,8 +1,7 @@
 public: yes
 tags: [lua, wat, quirks]
 summary: |
-  Why lua is the greatest language in the world: variadic functions and
-  argument packing
+  Why lua is the greatest language in the world.
 
 Using a lua for great power and good
 ====================================
