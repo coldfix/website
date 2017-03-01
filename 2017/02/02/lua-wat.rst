@@ -228,3 +228,11 @@ It delivers completely unpredictable output such as this:
     1   2   3   nil 5   nil 7   nil 9   nil nil nil nil
     1   2   3   nil 5   nil 7   nil 9   nil nil nil nil nil
     1   2   3   nil 5   nil 7   nil 9   nil nil nil nil nil nil
+
+
+EDIT: or this
+-------------
+
+**UPDATE:** Note my `follow-up post`_.
+
+.. _follow-up post: ../../../03/02/lua-argument-packing/
