@@ -88,7 +88,7 @@ user path. Make it writable by root only (because we are executing it with
 sudo).
 
 .. code-block:: bash
-    :caption: /usr/local/bin
+    :caption: /usr/local/bin/openvpn-daemonize
 
     #! /bin/zsh
 
