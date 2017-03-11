@@ -62,7 +62,7 @@ you may need additional arguments for the filter or map.
 Your mother, coming from Haskell, would like to write it this way:
 
 .. code-block:: python
-    :emphasize-lines: 4,6
+    :emphasize-lines: 5,7
 
     def sum_of_prime_factor_quotients(numbers):
         return sum(a / b
@@ -76,11 +76,12 @@ But when you tell her that there is no such syntax, she explains that the
 syntax she suggested is in fact just a shorthand for the following:
 
 .. code-block:: python
-    :emphasize-lines: 4,6
+    :emphasize-lines: 5,7
 
     def sum_of_prime_factor_quotients(numbers):
         return sum(a / b
                    for num in numbers
+                   if  num % 2 != 0
                    for factors in [prime_factors(num)]
                    if len(factors) == 2
                    for a, b in [factors])
