@@ -99,11 +99,14 @@ Most of the above applause is not specific to lua. In many regards, lua is
 very similar to javascript_ and perl.
 
 And I do get, why certain things are the way they are. Lua is supposed to be a
-simple, lightweight scripting language that is easy to embed in arbitrary
-applications.
+simple, lightweight and portable scripting language that is easy to embed in
+arbitrary applications.
 
 And there are neat things about the language too: In fact, I (kind of) do
 enjoy the simplicity and differentness of the prototype based object
 orientation.
 
+For a more comprehensive list, see `Lua Gotchas`_.
+
 .. _javascript: https://www.destroyallsoftware.com/talks/wat
+.. _Lua Gotchas: http://www.luafaq.org/gotchas.html
