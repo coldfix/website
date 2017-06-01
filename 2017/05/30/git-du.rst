@@ -10,40 +10,31 @@ Ever wanted to do ``git du``, accumulating the size of folders or files
 through the entire history? Or just wanted to know the maximum or average size
 of a file or folder?
 
-You might find the following example useful to adapt for your needs:
+Download the git-du-helper.pl_ script into your current working directory and
+then execute the following command:
 
 .. code-block:: bash
 
-    git rev-list master |
-        xargs -l1 -- git ls-tree -lr |
-        ./git-du-helper.pl \
-    > raw_sizes.txt
+    git rev-list master | xargs -l1 -- git ls-tree -lr | ./git-du-helper.pl > raw_sizes.txt
 
-This assumes you have downloaded the git-du-helper.pl_ script into your
-current working directory.
-
+You get a text file with columns ``SUM_SIZE MAX_SIZE NUM_REVS PATH``.
 
 What's going on here?
 
-- ``git rev-list master`` prints all revisions in the history of ``master``
-- ``| xargs -l1 -- git ls-tree -lr`` shows a listing of files + size for each
-  revision
-- ``| ./git-du-helper.pl`` analyzes the text data (no interaction with git).
-- ``-f`` means that only files should be printed, not directories
-- ``> raw_sizes.txt`` write the output to a tabular file with columns
-  ``SUM_SIZE MAX_SIZE NUM_REVS PATH``.
+- ``git rev-list`` prints all revisions in the history of a branch
+- ``xargs -l1 -- git ls-tree`` shows list of files and their size for each revision
+- ``./git-du-helper.pl`` analyzes the text data (no interaction with git).
 
 You can now pose additional queries to get pretty-printed output, e.g. sort by
 ``MAX_SIZE``, show human readable sizes (KiB/MiB/…) and columnate:
 
 .. code-block:: bash
 
-    < raw_sizes \
-        sort -n -k2,2  |
+    < raw_sizes sort -n -k2,2  |
         numfmt --to=iec-i --field=1,2 --format='%.1f ' --suffix=B |
         column -t > file_sizes.txt
 
-Note that these commands don't reflect the actual storage size on disk because
+Note that these numbers don't reflect the actual storage size on disk because
 git compresses objects and can pack similar objects based on deltas using
 packfiles_ (see also this `excellent answer on SO`_ and maybe `this post`_).
 If you want to detect large files on disk, take a look at Steve Lorek's
