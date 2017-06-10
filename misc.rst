@@ -5,7 +5,7 @@ Misc
 
 Shameless self-advertisements:
 
-Services/sites:
+Services/sites (see my docker-compose_ config if you're interested):
 
 - jabber/XMPP: server running on *coldfix.de*. Please, feel free to make
   accounts (this service uses SCRAM_, so I won't get your password)
@@ -32,6 +32,7 @@ Scientific:
   (Master's thesis in physics)
 
 
+.. _docker-compose: https://github.com/coldfix/server
 .. _SCRAM: https://en.wikipedia.org/wiki/Salted_Challenge_Response_Authentication_Mechanism
 .. _gogs.coldfix.de: https://gogs.coldfix.de
 .. _cryptpad.coldfix.de: https://cryptpad.coldfix.de
