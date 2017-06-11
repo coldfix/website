@@ -38,9 +38,10 @@ No problem, I thought, let's just ``git filter-branch`` these files to hell:
         --index-filter "$(pwd)/extract_gz_files.sh \$GIT_COMMIT" \
         -- ${REFS[@]}
 
-With the following ``extract_gz_files.sh`` script in the current directory:
+With the following script in the current directory:
 
 .. code-block:: bash
+    :caption: extract_gz_files.sh
 
     #! /bin/zsh
     mkdir -p .known-objects
@@ -99,8 +100,7 @@ Said module can be downloaded from github:
     git clone https://github.com/coldfix/git-filter-tree
     PTH_SCRIPTS=$(readlink -f git-filter-tree)
 
-Before executing the following snippet, you should also make the following
-preparations:
+Before continuing, you should also make the following preparations:
 
 .. code-block:: bash
 
@@ -148,6 +148,23 @@ still missing (but maybe I will implement them at some point):
 .. _blink_history_rewrite: https://github.com/primiano/git-tools/tree/master/history-rewrite
 .. _pygit2: https://github.com/libgit2/pygit2
 
+Remove unneeded objects
+~~~~~~~~~~~~~~~~~~~~~~~
+
+After you're finished with either ``filter-branch`` command, you may find that
+the repository still takes up more space than than the original repository. So
+all of that for nothing? No, it's just that we haven't performed a final step:
+
+We have to to tell git to clean up, delete all the unreferenced objects and
+compress all the others. Be sure to do this only on your cloned repository –
+otherwise you will lose data:
+
+.. code-block:: bash
+
+    rm -rf refs/original/
+    git reflog expire --expire=now --all
+    git gc --prune=now
+    git gc --aggressive --prune=now
 
 Give me a one-liner!
 ~~~~~~~~~~~~~~~~~~~~
