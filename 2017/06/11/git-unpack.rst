@@ -33,8 +33,8 @@ No problem, I thought, let's just ``git filter-branch`` these files to hell:
 
 .. code-block:: bash
 
-    git filter-branch \
-        --index-filter "$(pwd)/extract_gz_files.sh \$GIT_COMMIT" \
+    CWD="$(pwd)" git filter-branch \
+        --index-filter '$CWD/extract_gz_files.sh' \
         -- --branches --tags
 
 With the following script in the current directory:
@@ -46,7 +46,7 @@ With the following script in the current directory:
     mkdir -p .known-objects
 
     git ls-tree -lr $GIT_COMMIT | while read -r MODE TYPE OBJ SIZE NAME; do
-        if [[ $NAME == tests/**.ref.gz ]]; then
+        if [[ $NAME == *.gz ]]; then
             if [[ ! -e .known-objects/$OBJ ]]; then
                 git cat-file blob $OBJ |
                     gunzip |
@@ -91,32 +91,26 @@ other hand: you should be able to use this module with every git repository;
 and without having to perform any preparation steps as described in the above
 article (they may, however, still result in performance improvements).
 
-Said module can be downloaded from github:
+Very first, clone your repository, you don't want to accidentally lose data:
 
 .. code-block:: bash
 
-    git clone https://github.com/coldfix/git-filter-tree
-    PTH_SCRIPTS=$(readlink -f git-filter-tree)
-
-Before continuing, you should also make the following preparations:
-
-.. code-block:: bash
-
-    export ORIG=/path/to/repository
-    export DEST=/tmp/clone
-    git clone $ORIG $DEST --mirror
-    cd $DEST
+    git clone ORIG DEST --mirror
+    cd DEST
 
 Okay, we're ready to rewrite. Instead of the single filter-branch command, we
 proceed now in two phases.
 
 First, rewrite the trees using the python module (parallelized). This creates
-an folder ``objmap`` where it stores for each top level tree, the hash of the
+a folder ``objmap`` where it stores for each top level tree, the hash of the
 tree with which it should be replaced:
 
 .. code-block:: bash
 
-    git log --format='%T' --branches --tags | sort -u | $PTH_SCRIPTS/git-unpack.py
+    git clone https://github.com/coldfix/git-filter-tree
+
+    git log --format='%T' --branches --tags | \
+        python git-filter-tree/git_filter_tree unpack
 
 And second, rewrite the commits using ``git filter-branch --commit-filter``,
 making use of the ``objmap/`` folder created in phase 1 (still sequential, but
@@ -125,7 +119,7 @@ fast enough):
 .. code-block:: bash
 
     git filter-branch --commit-filter '
-        git commit-tree $(cat $DEST/objmap/$1) "${@:2}"' \
+        git commit-tree $(cat $GIT_DIR/objmap/$1) "${@:2}"' \
         -- --branches --tags
 
 Voilà, the 2 hour job is now done in 4 minutes, factor 30 speedup, not bad.
@@ -173,9 +167,9 @@ Sorry, two lines:
 While my particular use-case may be rather rare, the pattern is genuinely
 generic. So, if you're interested to do a similar but different tree-rewrite,
 and you don't mind writing a few lines of python code, you may be able to
-adapt the git-unpack.py_ module for your own purposes.
+adapt the unpack_ module for your own purposes.
 
 Also, please don't hesitate to open issues and/or submit pull-requests with
 more examples.
 
-.. _git-unpack.py: https://github.com/coldfix/git-filter-tree/blob/master/git-unpack.py
+.. _unpack: https://github.com/coldfix/git-filter-tree/blob/master/git_filter_tree/unpack.py
