@@ -33,10 +33,9 @@ No problem, I thought, let's just ``git filter-branch`` these files to hell:
 
 .. code-block:: bash
 
-    REFS=($(git show-ref | cut -d' ' -f2- | grep -e ^refs/heads/ -e ^refs/tags/))
     git filter-branch \
         --index-filter "$(pwd)/extract_gz_files.sh \$GIT_COMMIT" \
-        -- ${REFS[@]}
+        -- --branches --tags
 
 With the following script in the current directory:
 
@@ -117,8 +116,7 @@ tree with which it should be replaced:
 
 .. code-block:: bash
 
-    REFS=($(git show-ref | cut -d' ' -f2- | grep -e ^refs/heads/ -e ^refs/tags/))
-    git log --format='%T' ${REFS[@]} | sort -u | $PTH_SCRIPTS/git-unpack.py
+    git log --format='%T' --branches --tags | sort -u | $PTH_SCRIPTS/git-unpack.py
 
 And second, rewrite the commits using ``git filter-branch --commit-filter``,
 making use of the ``objmap/`` folder created in phase 1 (still sequential, but
@@ -127,7 +125,8 @@ fast enough):
 .. code-block:: bash
 
     git filter-branch --commit-filter '
-        git commit-tree $(cat $DEST/objmap/$1) "${@:2}"' -- ${REFS[@]}
+        git commit-tree $(cat $DEST/objmap/$1) "${@:2}"' \
+        -- --branches --tags
 
 Voilà, the 2 hour job is now done in 4 minutes, factor 30 speedup, not bad.
 
