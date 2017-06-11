@@ -96,7 +96,6 @@ Said module can be downloaded from github:
 
 .. code-block:: bash
 
-    # get filter-tree utilities
     git clone https://github.com/coldfix/git-filter-tree
     PTH_SCRIPTS=$(readlink -f git-filter-tree)
 
@@ -104,34 +103,29 @@ Before continuing, you should also make the following preparations:
 
 .. code-block:: bash
 
-    # path of the rewrites:
     export ORIG=/path/to/repository
     export DEST=/tmp/clone
-
-    echo "\nClone repository"
     git clone $ORIG $DEST --mirror
     cd $DEST
 
 Okay, we're ready to rewrite. Instead of the single filter-branch command, we
 proceed now in two phases.
 
-1. rewrite the trees using the python module (parallelized). This creates an
-   folder ``objmap`` where it stores for each top level tree, the hash of the
-   tree with which it should be replaced.
-
-2. rewrite the commits using ``git filter-branch --commit-filter``, making use
-   of the ``objmap/`` folder created in phase 1 (still sequential, but fast
-   enough).
+First, rewrite the trees using the python module (parallelized). This creates
+an folder ``objmap`` where it stores for each top level tree, the hash of the
+tree with which it should be replaced:
 
 .. code-block:: bash
 
-    # phase 1:
-    echo "\nRewriting trees (parallel)"
     REFS=($(git show-ref | cut -d' ' -f2- | grep -e ^refs/heads/ -e ^refs/tags/))
     git log --format='%T' ${REFS[@]} | sort -u | $PTH_SCRIPTS/git-unpack.py
 
-    # phase 2:
-    echo "\nRewriting commits (sequential)"
+And second, rewrite the commits using ``git filter-branch --commit-filter``,
+making use of the ``objmap/`` folder created in phase 1 (still sequential, but
+fast enough):
+
+.. code-block:: bash
+
     git filter-branch --commit-filter '
         git commit-tree $(cat $DEST/objmap/$1) "${@:2}"' -- ${REFS[@]}
 
