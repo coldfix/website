@@ -25,8 +25,8 @@ Extract submodule
 ~~~~~~~~~~~~~~~~~
 
 Our first step, `Splitting a subfolder out into a new repository`_ is a common
-task and the standard method to do it works as follows (**do not forget to
-clone or you will lose data!**):
+task and the standard method to do it works as follows (**don't skip to CLONE
+or you will lose data!**):
 
 .. code-block:: bash
 
@@ -35,8 +35,10 @@ clone or you will lose data!**):
     git filter-branch --prune-empty --subdirectory-filter <FOLDER> \
         -- --branches --tags
 
-And boom, you're done. (Don't forget ``--mirror`` to copy all your branches
-and tags!)
+And boom, you're done.
+
+(Use ``--mirror`` to copy all your branches and tags and make a *bare*
+repository!)
 
 .. _Splitting a subfolder out into a new repository: https://help.github.com/articles/splitting-a-subfolder-out-into-a-new-repository/
 
@@ -114,7 +116,7 @@ Now, for simplicity ``export`` up pathes for later use:
     local  url=...          # url where the new submodule will be published
 
 And create a file with the name ``gitmod`` in the directory of the clone with
-the content that should be put in the ``.gitmodules`` file:
+the content that should be put in the ``.gitmodules`` file, e.g.:
 
 .. code-block:: bash
 
@@ -155,8 +157,8 @@ With this itchy helper script in the git directory:
         fi
         obj_submod=$(cat "$submodule"/treemap/$obj_folder)
         git rm -r --cached --ignore-unmatch -q "$subfolder" .gitmodules
-        git update-index --add --cacheinfo 100644 $obj_gitmod .gitmodules
-        git update-index --add --cacheinfo 160000 $obj_submod "$subfolder"
+        git update-index --add --cacheinfo 100644,$obj_gitmod,.gitmodules
+        git update-index --add --cacheinfo 160000,$obj_submod,"$subfolder"
     fi
 
 Okay, this may look a bit monstrous but what it does is simply lookup the
