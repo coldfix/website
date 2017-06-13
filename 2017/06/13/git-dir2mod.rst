@@ -134,6 +134,7 @@ Finally, run ``filter-branch``:
 
 .. code-block:: bash
 
+    export NULL=$(git hash-object -w -t blob --stdin </dev/null)
     git filter-branch --index-filter '$GIT_DIR/dir2mod_helper.zsh' \
         -- --branches --tags
 
@@ -145,16 +146,11 @@ With this itchy helper script in the git directory:
     mkdir -p .gitmod
     if obj_folder=$(git rev-parse $GIT_COMMIT:"$subfolder" 2>/dev/null); then
         obj_gitmod_old=$(git rev-parse $GIT_COMMIT:.gitmodules 2>/dev/null) ||
-            obj_gitmod_old=NULL
-        if [ -e .gitmod/$obj_gitmod_old ]; then
-            obj_gitmod=$(cat .gitmod/$obj_gitmod_old)
-        else
-            obj_gitmod=$( (
-                [ $obj_gitmod_old != NULL ] && git cat-file blob $obj_gitmod_old
-                cat $GIT_DIR/gitmod
-            ) | git hash-object -w -t blob --stdin )
-            echo $obj_gitmod > .gitmod/$obj_gitmod_old
-        fi
+            obj_gitmod_old=$NULL
+        obj_gitmod=$( cat .gitmod/$obj_gitmod_old 2>/dev/null ||
+            (git cat-file blob $obj_gitmod_old && cat $GIT_DIR/gitmod) |
+            git hash-object -w -t blob --stdin |
+            tee .gitmod/$obj_gitmod_old )
         obj_submod=$(cat "$submodule"/treemap/$obj_folder)
         git rm -r --cached --ignore-unmatch -q "$subfolder" .gitmodules
         git update-index --add --cacheinfo 100644,$obj_gitmod,.gitmodules
