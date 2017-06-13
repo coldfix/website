@@ -119,7 +119,7 @@ fast enough):
 .. code-block:: bash
 
     git filter-branch --commit-filter '
-        git commit-tree $(cat $GIT_DIR/objmap/$1) "${@:2}"' \
+        obj=$1; shift; git commit-tree $(cat $GIT_DIR/objmap/$obj) "$@"' \
         -- --branches --tags
 
 Voilà, the 2 hour job is now done in 4 minutes, factor 30 speedup, not bad.
