@@ -135,12 +135,13 @@ Finally, run ``filter-branch``:
 .. code-block:: bash
 
     export NULL=$(git hash-object -w -t blob --stdin </dev/null)
-    git filter-branch --index-filter '$GIT_DIR/dir2mod_helper.zsh' \
+    git filter-branch --index-filter '$GIT_DIR/dir2mod_helper.sh' \
         -- --branches --tags
 
 With this itchy helper script in the git directory:
 
 .. code-block:: bash
+    :caption: $GIT_DIR/dir2mod_helper.sh
 
     #! /bin/sh
     mkdir -p .gitmod
