@@ -12,6 +12,7 @@ my %folder_contents;
 while (<>) {
     chomp;
     my ($mode, $kind, $hash, $size, $filename) = split(/\s+/, $_, 5);
+    $size = 0 if ($size eq '-');
     do {
         $folder_contents{$filename}{$hash} = $size
     } until ($just_files || (($filename = dirname($filename) . "/") eq './'));
