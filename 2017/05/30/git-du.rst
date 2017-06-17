@@ -30,7 +30,7 @@ You can now pose additional queries to get pretty-printed output, e.g. sort by
 
 .. code-block:: bash
 
-    < raw_sizes sort -n -k2,2  |
+    < raw_sizes.txt sort -n -k2,2  |
         numfmt --to=iec-i --field=1,2 --format='%.1f ' --suffix=B |
         column -t > file_sizes.txt
 
