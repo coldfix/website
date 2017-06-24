@@ -14,8 +14,8 @@ RUN apk update && \
     chmod +x /usr/local/bin/dumb-init && \
     git clone https://github.com/blogdown/blogdown && \
     pip install ./blogdown && \
+    make icons && \
     apk del $build_deps && \
-    cd /blog && \
     rm -rf blogdown
 
 EXPOSE 5000

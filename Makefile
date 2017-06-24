@@ -1,10 +1,13 @@
 BLOGDOWN = .virtualenv/35/bin/run-blogdown
 
-build:
+build: icons
 	$(BLOGDOWN) build
 
-serve:
+serve: icons
 	$(BLOGDOWN) serve
+
+icons: $(ICONS)
+	./makeico.sh
 
 deploy: clean build
 	rsync --delete --archive _build/ cx:/var/www
