@@ -5,14 +5,14 @@
       xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
     <g id="l1">
-      <path d="M 0 0 L 0 55 l 50 20" stroke="white" fill="#7777ff" stroke-width="15"/>
+      <path d="M 0 0 L 0 55 l 50 20" stroke="white" fill="#ff7777" stroke-width="15"/>
       <g transform="rotate(30 0 50)">
         <line x1="0" y1="55" x2="+20" y2="80" stroke="white" stroke-width="15"/>
         <line x1="0" y1="55" x2="-20" y2="80" stroke="white" stroke-width="15"/>
       </g>
     </g>
   </defs>
-  <circle cx="100" cy="100" r="100" fill="#0000aa"/>
+  <circle cx="100" cy="100" r="100" fill="#880000"/>
   <use x="100" y="100" xlink:href="#l1" transform="rotate(0 100 100)"/>
   <use x="100" y="100" xlink:href="#l1" transform="rotate(72 100 100)"/>
   <use x="100" y="100" xlink:href="#l1" transform="rotate(144 100 100)"/>
