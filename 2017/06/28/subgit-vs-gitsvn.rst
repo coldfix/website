@@ -257,37 +257,40 @@ what can be done:
 Migrating issues
 ----------------
 
-I had a look at a few alternative tools for migrating issues. In the end I
-settled for trac-hub_ for the following reasons:
+I looked at a few alternative tools for migrating issues. In the end I settled
+for trac-hub_ for the following reasons:
 
 - support for attachments
 - support for labels
 - easy to modify
 
-In fact, the last point turned out to be the most important one. I ended up
+In fact, the last point turned out to be the key strength by far. I ended up
 patching most of the system for my own needs and completely changing the
-logic in my fork_ by using the new github API for importing issues. Its main
-advantages over the normal issue API are that it
+logic. The changes are now all integrated in the upstream so you don't have to
+worry about which one to choose.
 
-- makes you immune to triggering abuse-detection warnings and blocking your
-  migration mid-process.
-- doesn't increase your "contribution" count beyond limit
-- doesn't send notifications for every migrated issue/comment
-- is much faster than the old API (can migrate few hundred tickets in minutes)
-- can set the correct dates for migrated issues/comments
-- can import all comments in an issue at once
+The tool now uses githubs new issue import API which allows to perform the
+whole process…
 
-However, I decided to put all comments on an issue in the body of the initial
-post to make it more concise and readable and avoid putting my name on every
-message. For an example of how this looks, see e.g.  here_. There are some
-additional style changes as well.
+- …without hitting abuse detection warnings and getting blocked
+- …without sending email notifications
+- …without increasing your contribution count for each migrated issue
+- …much faster than with the `normal issues API`_
+- …with correct creation/closed date set
+- …atomically without users being able to interfere in the creation of any
+  single issue
+
+For MAD-X, I decided to put all comments on an issue in the body of the
+initial post to make it more concise and readable and avoid putting my name on
+every message. For an example of how this looks, see e.g. here_. This
+behaviour can be selected by using the ``-S`` flag.
 
 .. _trac-hub:   https://github.com/mavam/trac-hub
-.. _fork:       https://github.com/coldfix/trac-hub
+.. _normal issues API: https://developer.github.com/v3/issues/
 .. _here:       https://github.com/MethodicalAcceleratorDesign/MAD-X/issues/93
 
-In order to use it, you should first create a mapping of the revision numbers
-to commit ids as follows:
+In order to use the tool, you should first create a mapping of the revision
+numbers to commit ids as follows:
 
 .. code-block:: bash
 
@@ -300,7 +303,7 @@ Now clone the tool from github:
 
 .. code-block:: bash
 
-    git clone git@github.com:coldfix/trac-hub.git
+    git clone git@github.com:mavam/trac-hub
 
 You can use the script in ``tools/download-trac-attachments-mysql.sh`` as an
 example of how to download attachments from the trac system and then e.g.
@@ -321,4 +324,8 @@ When you're done, execute as follows:
     bundle install --path vendor/bundle
     bundle exec trac-hub \
         -a BASE_URL_FOR_ATTACHMENTS \
-        -c config.yaml -r ../revmap.txt -s1
+        -c config.yaml -r ../revmap.txt -s 1 \
+        -S
+
+While importing, I recommend to temporarily limit repository interactions to
+collaborators only in the repositories settings.
