@@ -100,8 +100,11 @@ performance of subsequent accesses.
 This can be done using at least three basic methods, with a strong preference
 on the third one:
 
-- if you have direct access to the host from which the SVN repository is
-  served, you can dump it and then import:
+1. dump using svnadmin
+~~~~~~~~~~~~~~~~~~~~~~
+
+If you have direct access to the host from which the SVN repository is served,
+you can dump it and then import:
 
 .. code-block:: bash
 
@@ -109,8 +112,13 @@ on the third one:
     svnadmin create repo-svn
     svnadmin load repo-svn < dump
 
-- if you don't have direct access, you can do the same using ``rsvndump`` with
-  the root address of the repository:
+2. dump using rsvndump
+~~~~~~~~~~~~~~~~~~~~~~
+
+(not recommended)
+
+If you don't have direct access, you can do the same using ``rsvndump`` with
+the root address of the repository:
 
 .. code-block:: bash
 
@@ -118,10 +126,10 @@ on the third one:
     svnadmin create repo-svn
     svnadmin load repo-svn < dump
 
-  However, note that for some reason the ``rsvndump`` operation needed about
-  16GiB in my ``/tmp`` when doing this. If you need to do this, be prepared to
-  switch on additional swaps and remount your ``/tmp`` with more space or
-  directly mount ``/tmp`` from disc.
+However, note that for some reason the ``rsvndump`` operation needed about
+16GiB in my ``/tmp`` when doing this. If you need to do this, be prepared to
+switch on additional swaps and remount your ``/tmp`` with more space or
+directly mount ``/tmp`` from disc.
 
 ..  fallocate -l 20G swapfile
 ..  mkswap swapfile
@@ -129,7 +137,10 @@ on the third one:
 ..  mount -o remount
 ..  mount -o remount,size=20G /tmp
 
-- synchronize using ``svnsync``:
+3. synchronize using svnsync
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is the preferred option.
 
 .. code-block:: bash
 
@@ -141,8 +152,11 @@ on the third one:
     svnsync sync file://`pwd`
     cd -
 
-Note that with the 3rd method you can easily pull new commits on the SVN
-upstream into your mirror by re-issueing the final ``svnsync sync`` command.
+Note that with this method you can easily pull new commits on the SVN upstream
+into your mirror by re-issueing the final ``svnsync sync`` command.
+
+Finally
+~~~~~~~
 
 Finally, make the SVN mirror accessible on ``svn://localhost:3030``:
 
