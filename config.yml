@@ -16,7 +16,6 @@ ignore_files:
   - 'TODO'
   - '*.aux'
   - '*.log'
-  - 'makeico.sh'
 modules:
   pygments:
     style: monokai
