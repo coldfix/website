@@ -11,6 +11,9 @@ Being your own Postmaster
 .. contents:: :local:
     :depth: 1
 
+**EDIT 29.06.2017:** *Please set dovecot's ``ssl_cert`` to ``fullchain.pem`` to
+make thunderbird stop complaining!*
+
 Objective
 ~~~~~~~~~
 
@@ -213,7 +216,7 @@ I consider anything before TLSv1.2 obsolete.
     # SMTP SSL/TLS certificates
     smtpd_banner = $myhostname ESMTP $mail_name
     smtpd_use_tls = yes
-    smtpd_tls_cert_file = /etc/letsencrypt/live/$myhostname/cert.pem
+    smtpd_tls_cert_file = /etc/letsencrypt/live/$myhostname/fullchain.pem
     smtpd_tls_key_file  = /etc/letsencrypt/live/$myhostname/privkey.pem
     smtpd_tls_auth_only = yes
     smtpd_tls_security_level = may
@@ -385,7 +388,7 @@ Now, start secure IMAP and POP3 servers:
 
     # IMAP/POP servers:
     ssl = required
-    ssl_cert = </etc/letsencrypt/live/coldfix.de/cert.pem
+    ssl_cert = </etc/letsencrypt/live/coldfix.de/fullchain.pem
     ssl_key = </etc/letsencrypt/live/coldfix.de/privkey.pem
     ssl_protocols = !SSLv2 !SSLv3 !TLSv1 !TLSv1.1
 
