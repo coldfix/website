@@ -6,7 +6,7 @@ build: icons
 serve: icons
 	$(BLOGDOWN) serve
 
-deploy: clean build
+deploy: build
 	rsync --delete --archive _build/ cx:/var/www
 
 clean:
