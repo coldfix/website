@@ -124,16 +124,8 @@ fast enough):
 
 Voilà, the 2 hour job is now done in 4 minutes, factor 30 speedup, not bad.
 
-Note that there are at least two performance improvements that this process is
-still missing (but maybe I will implement them at some point):
-
-- use pygit2_ to cut down costs due to spawning countless subprocesses for
-  individual git-related tasks and queries
-- implement a better job scheduler that avoids recomputing the same tree twice
-
 .. _Large scale Git history rewrites: https://www.bitleaks.net/blog/large-scale-git-history-rewrites/
 .. _blink_history_rewrite: https://github.com/primiano/git-tools/tree/master/history-rewrite
-.. _pygit2: https://github.com/libgit2/pygit2
 
 Remove unneeded objects
 ~~~~~~~~~~~~~~~~~~~~~~~
