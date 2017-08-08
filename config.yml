@@ -16,6 +16,8 @@ ignore_files:
   - 'TODO'
   - '*.aux'
   - '*.log'
+  - 'Dockerfile'
+  - 'blogdown'
 modules:
   pygments:
     style: monokai
