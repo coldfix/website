@@ -1,24 +1,23 @@
-FROM python:3.6-alpine
+FROM python:3.6-alpine3.6
+
+ARG build_deps="git"
+ARG runtime_deps="dumb-init"
+ARG blogger_uid=1000
+
+RUN apk update && \
+    apk add -u $build_deps $runtime_deps && \
+    adduser -D -H -h /blog -u $blogger_uid blogger && \
+    git clone https://github.com/blogdown/blogdown && \
+    pip install ./blogdown && \
+    apk del $build_deps && \
+    rm -rf blogdown
+
+EXPOSE 5000
+USER blogger
 
 COPY . /blog
 WORKDIR /blog
 VOLUME /blog
 
-# 3.3 has no dumb-init nor tini, so we we have to download the binary manually.
-# For that we need openssl, see: https://github.com/Yelp/dumb-init/issues/73.
-ENV build_deps="openssl git"
-
-RUN apk update && \
-    apk add -u $build_deps && \
-    wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.0/dumb-init_1.2.0_amd64 && \
-    chmod +x /usr/local/bin/dumb-init && \
-    git clone https://github.com/blogdown/blogdown && \
-    pip install ./blogdown && \
-    make icons && \
-    apk del $build_deps && \
-    rm -rf blogdown
-
-EXPOSE 5000
-
-ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
-CMD ["run-blogdown", "serve"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--"]
+CMD ["./blogdown", "serve"]
