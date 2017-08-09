@@ -1,9 +1,5 @@
 FROM python:3.6-alpine3.6
 
-COPY . /blog
-WORKDIR /blog
-VOLUME /blog
-
 ARG build_deps="git"
 ARG runtime_deps="dumb-init"
 ARG blogger_uid=1000
@@ -18,6 +14,10 @@ RUN apk update && \
 
 EXPOSE 5000
 USER blogdown
+
+COPY . /blog
+WORKDIR /blog
+VOLUME /blog
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["./blogdown", "serve"]
