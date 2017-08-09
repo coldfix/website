@@ -1,4 +1,4 @@
-FROM python:3.6-alpine
+FROM python:3.6-alpine3.6
 
 COPY . /blog
 WORKDIR /blog
