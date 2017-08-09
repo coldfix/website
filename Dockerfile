@@ -13,7 +13,7 @@ RUN apk update && \
     rm -rf blogdown
 
 EXPOSE 5000
-USER blogdown
+USER blogger
 
 COPY . /blog
 WORKDIR /blog
