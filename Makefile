@@ -22,19 +22,19 @@ clean:
 # https://realfavicongenerator.net/blog/apple-touch-icon-the-good-the-bad-the-ugly/
 # https://mathiasbynens.be/notes/touch-icons
 
-ICONS = favicon.ico \
-		apple-touch-icon-120x120-precomposed.png \
-		apple-touch-icon-precomposed.png \
-		apple-touch-icon.png
+ICONS = _build/favicon.ico \
+		_build/apple-touch-icon-120x120-precomposed.png \
+		_build/apple-touch-icon-precomposed.png \
+		_build/apple-touch-icon.png
 
 icons: $(ICONS)
 
-.INTERMEDIATE: _ico32.ico _ico48.ico _ico64.ico
-favicon.ico: _ico32.ico _ico48.ico _ico64.ico
+.INTERMEDIATE:      _build/_ico32.ico _build/_ico48.ico _build/_ico64.ico
+_build/favicon.ico: _build/_ico32.ico _build/_ico48.ico _build/_ico64.ico
 	convert $^ $@
 
-_ico%.ico: snowflake.svg
+_build/_ico%.ico: snowflake.svg
 	convert $< -resize $*x$* $@
 
-%.png: snowflake.svg
+_build/%.png: snowflake.svg
 	convert $< -resize 120x120 $@
