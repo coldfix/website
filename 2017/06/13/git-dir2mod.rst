@@ -183,14 +183,20 @@ First, use the python module to rewrite the trees (parallelized):
         $(readlink -f ../treemap) $subfolder $url
 
 This creates an index of ``COMMIT → TREE`` that associates to every existing
-commit its rewritten root tree.
+commit its rewritten root tree. We will extract this index into an easier to
+access directory structure:
+
+.. code-block:: bash
+
+    mkdir .git/trees
+    <.git/objmap while read sha1 tree; do echo $tree>.git/trees/$sha1; done
 
 And second, rewrite the commits (sequential):
 
 .. code-block:: bash
 
     git filter-branch --commit-filter '
-        obj=$1; shift; git commit-tree $(cat $GIT_DIR/objmap/$obj) "$@"' \
+        obj=$1; shift; git commit-tree $(cat $GIT_DIR/trees/$obj) "$@"' \
         -- --branches --tags
 
 And a multi hour job can now be done in few minutes – there is still room for
