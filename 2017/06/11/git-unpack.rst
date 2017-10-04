@@ -102,7 +102,7 @@ Okay, we're ready to rewrite. Instead of the single filter-branch command, we
 proceed now in two phases.
 
 First, rewrite the trees using the python module (parallelized). This creates
-a folder ``objmap`` where it stores for each top level tree, the hash of the
+a file ``objmap`` where it stores for each top level tree, the hash of the
 tree with which it should be replaced:
 
 .. code-block:: bash
@@ -112,14 +112,22 @@ tree with which it should be replaced:
     git log --format='%T' --branches --tags | \
         python git-filter-tree/git_filter_tree unpack
 
+Let's extract the contents of the created ``objmap`` file into a directory
+that will be easier to access in the following:
+
+.. code-block:: bash
+
+    mkdir .git/trees
+    <.git/objmap while read sha1 tree; do echo $tree>.git/trees/$sha1; done
+
 And second, rewrite the commits using ``git filter-branch --commit-filter``,
-making use of the ``objmap/`` folder created in phase 1 (still sequential, but
+making use of the ``trees/`` folder created in phase 1 (still sequential, but
 fast enough):
 
 .. code-block:: bash
 
     git filter-branch --commit-filter '
-        obj=$1; shift; git commit-tree $(cat $GIT_DIR/objmap/$obj) "$@"' \
+        obj=$1; shift; git commit-tree $(cat $GIT_DIR/trees/$obj) "$@"' \
         -- --branches --tags
 
 Voilà, the 2 hour job is now done in 4 minutes, factor 30 speedup, not bad.
