@@ -152,9 +152,9 @@ Sorry, two lines:
 
 .. code-block:: bash
 
-    git clone https://github.com/coldfix/git-tree-filter
+    git clone https://github.com/coldfix/git-filter-tree
 
-    ./git-tree-filter/git-unpack ORIG DEST
+    ./git-filter-tree/git-unpack ORIG DEST
 
 While my particular use-case may be rather rare, the pattern is genuinely
 generic. So, if you're interested to do a similar but different tree-rewrite,
