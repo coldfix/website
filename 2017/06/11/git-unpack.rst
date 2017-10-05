@@ -101,9 +101,7 @@ Very first, clone your repository, you don't want to accidentally lose data:
 Okay, we're ready to rewrite. Instead of the single filter-branch command, we
 proceed now in two phases.
 
-First, rewrite the trees using the python module (parallelized). This creates
-a file ``objmap`` where it stores for each top level tree, the hash of the
-tree with which it should be replaced:
+First, rewrite the trees using the python module (parallelized):
 
 .. code-block:: bash
 
@@ -112,8 +110,9 @@ tree with which it should be replaced:
     git log --format='%T' --branches --tags | \
         python git-filter-tree/git_filter_tree unpack
 
-Let's extract the contents of the created ``objmap`` file into a directory
-that will be easier to access in the following:
+This creates a file ``objmap`` where it stores for each top level tree, the
+hash of the tree with which it should be replaced. Let's extract the contents
+of this file into a directory that will be easier to access in the following:
 
 .. code-block:: bash
 
