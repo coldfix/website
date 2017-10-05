@@ -182,14 +182,14 @@ First, use the python module to rewrite the trees (parallelized):
         python git-filter-tree/git_filter_tree dir2mod \
         $(readlink -f ../treemap) $subfolder $url
 
-This creates an index of ``COMMIT → TREE`` that associates to every existing
-commit its rewritten root tree. We will extract this index into an easier to
-access directory structure:
+This creates an index of ``OLD_TREE → NEW_TREE`` that associates to the root
+tree of every existing commit its rewritten root tree. We will extract this
+index into an easier to access directory structure:
 
 .. code-block:: bash
 
     mkdir .git/trees
-    <.git/objmap while read sha1 tree; do echo $tree>.git/trees/$sha1; done
+    <.git/objmap while read old new; do echo $new>.git/trees/$old; done
 
 And second, rewrite the commits (sequential):
 

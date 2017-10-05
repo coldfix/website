@@ -110,14 +110,15 @@ First, rewrite the trees using the python module (parallelized):
     git log --format='%T' --branches --tags | \
         python git-filter-tree/git_filter_tree unpack
 
-This creates a file ``objmap`` where it stores for each top level tree, the
-hash of the tree with which it should be replaced. Let's extract the contents
-of this file into a directory that will be easier to access in the following:
+This creates a file ``objmap`` where it stores the hashs of the root trees as
+they should be replaced. The line format is ``OLD NEW``. Let's extract the
+contents of this file into a directory that will be easier to access in the
+following:
 
 .. code-block:: bash
 
     mkdir .git/trees
-    <.git/objmap while read sha1 tree; do echo $tree>.git/trees/$sha1; done
+    <.git/objmap while read old new; do echo $new>.git/trees/$old; done
 
 And second, rewrite the commits using ``git filter-branch --commit-filter``,
 making use of the ``trees/`` folder created in phase 1 (still sequential, but
