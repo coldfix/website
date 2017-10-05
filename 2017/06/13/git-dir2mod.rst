@@ -174,7 +174,8 @@ and replace the subfolder and the ``.gitmodules`` file accordingly.
 For large repositories, this might be quite slow. If you don't want to wait
 for hours, keep on reading:
 
-**Speed this up**
+Speed up the third step
+-----------------------
 
 As mentioned in `"git unpack: efficient tree filter"`_, tree filters can be
 made a lot faster by parallelizing the tree rewrites and caching subtrees that
