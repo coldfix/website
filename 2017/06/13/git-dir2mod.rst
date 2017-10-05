@@ -79,14 +79,13 @@ SHA1 of the associated commit in the submodule.
 
 .. code-block:: bash
 
-    mkdir treemap
-    git log --format="%H %T" --branches --tags | while read sha1 tree; do
-        echo $sha1 > treemap/$tree
-    done
+    git log --format="%T %H" --branches --tags > treemap
 
-You should now have a folder called ``treemap`` with one file for each
-distinct state of the subdirectory. The file is named after the SHA1 hash of
-the tree and contains the SHA1 hash of the associated commit.
+You should now have a file called ``treemap`` with the hashes of the
+subdirectory tree and corresponding submodule commit.
+
+Note, that this approach is only sensible if you never have the same tree
+twice.
 
 We are now done with the submodule, let's go back to the folder where both the
 original repository and submodule are located:
@@ -130,6 +129,16 @@ the content that should be put in the ``.gitmodules`` file, e.g.:
 so if you did not clone into a bare/mirror repo, you will have to move it to
 ``.git/`` or adjust the pathes accordingly.)
 
+Before proceeding, we will also extract the ``treemap`` file into a directory
+``treemap.dir`` that will be more convenient to access from a shell script:
+
+.. code-block:: bash
+
+    mkdir $submodule/treemap.dir
+    while read tree sha1; do
+        echo $sha1 > $submodule/treemap.dir/$tree
+    done <$submodule/treemap
+
 Finally, run ``filter-branch``:
 
 .. code-block:: bash
@@ -152,7 +161,7 @@ With this itchy helper script in the git directory:
             (git cat-file blob $obj_gitmod_old && cat $GIT_DIR/gitmod) |
             git hash-object -w -t blob --stdin |
             tee .gitmod/$obj_gitmod_old )
-        obj_submod=$(cat "$submodule"/treemap/$obj_folder)
+        obj_submod=$(cat "$submodule"/treemap.dir/$obj_folder)
         git rm -r --cached --ignore-unmatch -q "$subfolder" .gitmodules
         git update-index --add --cacheinfo 100644,$obj_gitmod,.gitmodules
         git update-index --add --cacheinfo 160000,$obj_submod,"$subfolder"
