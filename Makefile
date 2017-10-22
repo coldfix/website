@@ -34,7 +34,9 @@ _build/favicon.ico: _build/_ico32.ico _build/_ico48.ico _build/_ico64.ico
 	convert $^ $@
 
 _build/_ico%.ico: snowflake.svg
+	@mkdir -p _build
 	convert $< -resize $*x$* $@
 
 _build/%.png: snowflake.svg
+	@mkdir -p _build
 	convert $< -resize 120x120 $@

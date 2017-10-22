@@ -21,15 +21,16 @@ a:hover {
 }
 
 #container {
-  max-width: 45em;
-  margin: 1ex auto;
-	border: thin solid white;
 }
 
 div.header {
 	background-color: #882222;
-	padding: 2ex 2em;
-  position: relative;
+	padding: 1rem 2rem;
+  position: fixed;
+  top: 5rem;
+  left: 1rem;
+  height: 10rem;
+  width: 9rem;
 }
 
 div.header a {
@@ -42,21 +43,19 @@ div.header a:hover {
 }
 
 div.header .blogtitle {
-  float: left;
   color: #bbbbbb;
   font-weight: bold;
 }
 
 ul.navigation {
   list-style: none;
-	text-align: center;
+	text-align: left;
   margin: 0;
   padding: 0;
 }
 
 ul.navigation > li {
-  display: inline;
-  margin: 0 1em;
+  margin: 0.5rem 1rem;
   padding: 0;
 }
 
@@ -74,8 +73,18 @@ ul.tagcloud > li {
   border-radius: 6px;
 }
 
+div.main {
+  margin-top: 2rem;
+  margin-left: 16rem;
+  margin-right: 4rem;
+}
+
 div.content {
-  margin-top: 3ex;
+  max-width: 45em;
+  margin: 1ex auto;
+  line-height: 29px;
+  font-size: 16px;
+  text-align: justify;
 }
 
 div.content h1.title {
@@ -124,10 +133,12 @@ ul.blog-archive > li {
   margin: 1ex 0;
 }
 
-div.content {
-  line-height: 29px;
-  font-size: 16px;
-  text-align: justify;
+div.footer {
+  position: fixed;
+  padding: 1rem 2rem;
+  left: 1rem;
+  width: 9rem;
+  top: 18rem;
 }
 
 div.footer div.flattr {
