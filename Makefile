@@ -1,4 +1,4 @@
-BLOGDOWN = .virtualenv/35/bin/run-blogdown
+BLOGDOWN = $(HOME)/.virtualenvs/blog/bin/run-blogdown
 
 build: icons
 	$(BLOGDOWN) build
