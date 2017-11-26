@@ -1,4 +1,4 @@
-BLOGDOWN = $(HOME)/.virtualenvs/blog/bin/run-blogdown
+BLOGDOWN = pipenv run run-blogdown
 
 build: icons
 	$(BLOGDOWN) build

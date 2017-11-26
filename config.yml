@@ -11,6 +11,8 @@ ignore_files:
   - '*.pdl'
   - 'config.yml'
   - 'Makefile'
+  - 'Pipfile'
+  - 'Pipfile.lock'
   - 'README.rst'
   - 'LICENSE.rst'
   - 'TODO'
