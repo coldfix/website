@@ -17,9 +17,9 @@ The best way to reach me is via email_ or github_. Though, in case you want to
 persue me legally (eye cancer?), this is how I am known to the authorities:
 
     | Thomas Gläßle
-    | 2 Rue La Fayette
-    | 01630 Saint-Genis-Pouilly
-    | — France
+    | Bachstr. 34
+    | 69121 Dossenheim
+    | — Germany
 
 Of course, the above address can also be used as write-only cache to store
 fabulous presents *wink*.
