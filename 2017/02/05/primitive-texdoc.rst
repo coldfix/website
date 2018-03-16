@@ -63,12 +63,13 @@ and make it executable:
     """
 
     import sys
+    from urllib.request import urlopen
     from lxml.html import parse, fromstring
 
 
     def main(args):
         url = args[0]
-        doc = parse(url).getroot()
+        doc = parse(urlopen(url)).getroot()
         text = fromstring(args[1]).text_content()   # replace HTML entities
         for link in doc.cssselect('a'):
             if link.text_content() == text:
