@@ -21,10 +21,12 @@ First, modify the ``vpnbox`` command as follows:
 
     #! /usr/bin/bash
 
+    user=$(whoami)
+
     # check if there is a default route in the netns going over tun0:
     # NOTE: 'tun0' may not be the correct interface name
     vpn_online() {
-        sudo ip netns exec vpn sudo -u thomas -- ip route \
+        sudo ip netns exec vpn sudo -u $user -- ip route \
             | grep default | grep tun0
     }
 
@@ -41,7 +43,7 @@ First, modify the ``vpnbox`` command as follows:
     fi
 
     # Execute the actual command as before:
-    sudo ip netns exec vpn sudo -u thomas -- "$@"
+    sudo ip netns exec vpn sudo -u $user -- "$@"
 
 To make this work without passwords, type ``sudo visudo`` to add the following
 to your ``sudoers``:
