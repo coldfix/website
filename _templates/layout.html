@@ -20,17 +20,19 @@
     <script src="/static/section-links.js"></script>
   </head>
   <body>
-    <div class="header">
-      <div class="blogtitle">
-        {{ config.blogtitle }}
+    <div class="outer-header">
+      <div class="header">
+        <div class="blogtitle">
+          {{ config.blogtitle }}
+        </div>
+        <ul class="navigation">
+          <li><a href="/">recent</a></li>
+          <li><a href="/archive">archive</a></li>
+          <li><a href="/tags">tags</a></li>
+          <li><a href="/misc">misc</a></li>
+          <li><a href="/about/">about</a></li>
+        </ul>
       </div>
-      <ul class="navigation">
-        <li><a href="/">recent</a></li>
-        <li><a href="/archive">archive</a></li>
-        <li><a href="/tags">tags</a></li>
-        <li><a href="/misc">misc</a></li>
-        <li><a href="/about/">about</a></li>
-      </ul>
     </div>
     <div class="main">
       <div class="content">

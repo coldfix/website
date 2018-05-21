@@ -23,6 +23,15 @@ a:hover {
 #container {
 }
 
+div.outer-header {
+	background-color: #660000;
+  position: fixed;
+  top: 0rem;
+  left: 0rem;
+  height: 100%;
+  width: 15rem;
+}
+
 div.header {
 	background-color: #882222;
 	padding: 1rem 2rem;
@@ -31,6 +40,7 @@ div.header {
   left: 1rem;
   height: 10rem;
   width: 9rem;
+  border-radius: 2ex;
 }
 
 div.header a {
@@ -135,14 +145,26 @@ ul.blog-archive > li {
 
 div.footer {
   position: fixed;
-  padding: 1rem 2rem;
-  left: 1rem;
-  width: 9rem;
+  padding: 0 0 0 0;
+  background: #ffaaaa;
+  border-radius: 1ex;
+  width: 7rem;
+  left: 7rem;
   top: 18rem;
 }
 
 div.footer div.flattr {
-  text-align: right;
+  text-align: center;
+  margin: 0.2em auto 0.2rem auto;
+}
+
+div.footer div.flattr a {
+  display: block;
+}
+
+div.footer div.flattr img {
+  margin: auto;
+  display: block;
 }
 
 .literal-block-wrapper {
