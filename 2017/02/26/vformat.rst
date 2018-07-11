@@ -63,3 +63,6 @@ ad-hoc checks or transformations. For example:
 
 As you see ``vformat()`` allows to do all sorts of things and is much more
 powerful than plain ``str.format()``
+
+**Note:** from python 3.2 upwards there is also the easier accessible
+``str.format_map(kwargs)`` that is easier to use.
