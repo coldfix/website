@@ -17,8 +17,9 @@ Software (maintaining):
 
 - udiskie_: automount tool, frontend for udisks
 - pidgin-tts_: espeak plugin for pidgin_ IM
-- battery_, volume-control_, keyboard-layout_, brightness_, screensaver_:
-  widgets for awesome-wm_
+- deficient_: collection of simple widgets for the awesome-wm_. Among others:
+  battery_, volume-control_, keyboard-layout_, calendar_, brightness_,
+  screensaver_
 - Citip_: CLI replacement for ITIP_ and Xitip_ with only free software
   dependencies
 
@@ -40,11 +41,13 @@ Scientific:
 .. _udiskie: https://github.com/coldfix/udiskie
 .. _pidgin-tts: https://github.com/coldfix/pidgin-tts
 .. _pidgin: https://www.pidgin.im/
-.. _battery: https://github.com/coldfix/awesome.battery-widget
-.. _volume-control: https://github.com/coldfix/awesome.volume-control
-.. _keyboard-layout: https://github.com/coldfix/awesome.keyboard-layout-indicator
-.. _brightness: https://github.com/coldfix/awesome.brightness
-.. _screensaver: https://github.com/coldfix/awesome.screensaver
+.. _deficient: https://github.com/deficient/
+.. _battery: https://github.com/deficient/battery-widget
+.. _volume-control: https://github.com/deficient/volume-control
+.. _keyboard-layout: https://github.com/deficient/keyboard-layout-indicator
+.. _calendar: https://github.com/deficient/calendar
+.. _brightness: https://github.com/deficient/brightness
+.. _screensaver: https://github.com/deficient/screensaver
 .. _awesome-wm: https://awesomewm.org/
 .. _Citip: https://github.com/coldfix/Citip
 .. _ITIP: http://user-www.ie.cuhk.edu.hk/~ITIP/
