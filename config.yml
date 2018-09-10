@@ -1,5 +1,5 @@
 ---
-active_modules: [pygments, tags, blog, latex, XresourcesLexer, disqus]
+active_modules: [pygments, tags, blog, latex, XresourcesLexer]
 author: Thomas Gläßle
 blogtitle: "cat /dev/brain |"
 canonical_url: https://www.coldfix.de
@@ -23,8 +23,6 @@ ignore_files:
 modules:
   pygments:
     style: monokai
-  disqus:
-    shortname: coldfix-de
 
 feed:
   name: Coder Gone Mad
