@@ -1,0 +1,107 @@
+#!/usr/bin/env python3
+from gi.repository import Gio
+
+import sys
+import time
+from collections import namedtuple
+
+
+STATUS_OFFLINE = 1
+
+StatusInfo = namedtuple('StatusInfo', [
+    'id', 'title', 'type', 'message', 'creation_time', 'has_substatuses',
+])
+
+
+def timestr(secs):
+    return time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(secs))
+
+
+class Purple(object):
+
+    BusName = 'im.pidgin.purple.PurpleService'
+    ObjectPath = '/im/pidgin/purple/PurpleObject'
+    Interface = 'im.pidgin.purple.PurpleInterface'
+
+    def __init__(self):
+        self.purple = Gio.DBusProxy.new_for_bus_sync(
+            Gio.BusType.SESSION,
+            Gio.DBusProxyFlags.NONE,
+            info=None,
+            name=self.BusName,
+            object_path=self.ObjectPath,
+            interface_name=self.Interface,
+            cancellable=None,
+        )
+
+    def status_info(self, status):
+        p = self.purple
+        return StatusInfo(
+            status,
+            p.PurpleSavedstatusGetTitle('(i)', status),
+            p.PurpleSavedstatusGetType('(i)', status),
+            p.PurpleSavedstatusGetMessage('(i)', status),
+            timestr(p.PurpleSavedstatusGetCreationTime('(i)', status)),
+            p.PurpleSavedstatusHasSubstatuses('(i)', status),
+        )
+
+    def get_all(self):
+        return self.purple.PurpleSavedstatusesGetAll('()')
+
+    def get_type(self, status):
+        return self.purple.PurpleSavedstatusGetType('(i)', status)
+
+    def offlinestatus(self):
+        p = self.purple
+        for status in self.get_all():
+            if self.get_type(status) == STATUS_OFFLINE:
+                return status
+        return p.PurpleSavedstatusNew('(si)', '', STATUS_OFFLINE)
+
+    def most_popular(self, num):
+        return self.purple.PurpleSavedstatusesGetPopular('(u)', num)
+
+    def current(self):
+        return self.purple.PurpleSavedstatusGetCurrent('()')
+
+    def default(self):
+        return self.purple.PurpleSavedstatusGetCurrent('()')
+
+    def setstatus(self, status):
+        self.purple.PurpleSavedstatusActivate('(i)', status)
+
+    def go_offline(self):
+        self.setstatus(self.offlinestatus())
+
+    def go_online(self):
+        self.setstatus(self.most_popular(1)[0])
+
+    def find(self, title):
+        return self.purple.PurpleSavedstatusFind('(s)', title)
+
+    def go_status(self, title):
+        self.setstatus(self.find(title))
+
+
+def main(args):
+    purple = Purple()
+
+    action_map = {
+        'list':    lambda:   map(purple.status_info, purple.get_all()),
+        'popular': lambda n: map(purple.status_info, purple.most_popular(int(n))),
+        'current': lambda: [purple.status_info(purple.current())],
+        'default': lambda: [purple.status_info(purple.default())],
+        'find':    lambda t: [purple.status_info(purple.find(t))],
+        'off':  purple.go_offline,
+        'on':   purple.go_online,
+        'set':  purple.go_status,
+    }
+
+    result = action_map[args[0]](*args[1:])
+    if result is not None:
+        for item in result:
+            print(item)
+
+
+if __name__ == '__main__':
+    main(sys.argv[1:])
