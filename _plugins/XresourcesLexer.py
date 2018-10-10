@@ -20,7 +20,7 @@ class XresourcesLexer(RegexLexer):
     """
 
     name = 'Xresources'
-    aliases = ['Xresources']
+    aliases = ['Xresources', 'xresources']
     filenames = ['.Xresources']
     mimetypes = []
 
