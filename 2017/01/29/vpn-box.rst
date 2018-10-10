@@ -8,8 +8,11 @@ VPN in a Nutshell
 
 Ever wanted to tunnel only specific applications through your VPN?
 
-**UPDATE:** Also consider my follow-up post `VPN
-autostart <../../../02/24/vpn-autostart/>`_.
+**UPDATE:** Also consider my follow-up post `VPN autostart`_, and the
+openvpn-routing-examples_ repository made from the code in this post.
+
+.. _VPN autostart: ../../../02/24/vpn-autostart/
+.. _openvpn-routing-examples: https://github.com/coldfix/openvpn-routing-examples
 
 .. contents:: :local:
 
