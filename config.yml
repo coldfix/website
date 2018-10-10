@@ -1,5 +1,5 @@
 ---
-active_modules: [pygments, tags, blog, latex, XresourcesLexer]
+active_modules: [pygments, tags, blog, latex]
 author: Thomas Gläßle
 blogtitle: "cat /dev/brain |"
 canonical_url: https://www.coldfix.de

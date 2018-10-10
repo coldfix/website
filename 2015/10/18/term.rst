@@ -92,7 +92,7 @@ I prefer **Source Code Pro** over the default fonts used by *xterm* and
 You can now configure your shiny new font to be used by adding the following
 lines to the file:
 
-.. code-block:: Xresources
+.. code-block:: properties
     :caption: ~/.Xresources
 
     XTerm*faceName: Source Code Pro
@@ -103,7 +103,7 @@ lines to the file:
 To change the color palette in both *xterm* and *urxvt* add the following
 lines handling both terminals at once:
 
-.. code-block:: Xresources
+.. code-block:: properties
     :caption: ~/.Xresources
 
     ! Colors for XTerm+URxvt and maybe other terminals:
@@ -142,7 +142,7 @@ plain *urxvt* package, which fixes the pager scrolling issue :
 
 Then add the following configuration to your ``~/.Xresources``:
 
-.. code-block:: Xresources
+.. code-block:: properties
     :caption: ~/.Xresources
 
     URxvt.secondaryScreen: 1

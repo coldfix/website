@@ -54,7 +54,7 @@ Qt4
 xterm
 ~~~~~
 
-.. code-block:: ini
+.. code-block:: properties
     :caption: ~/.Xresources
 
     XTerm*faceName: Source Code Pro
@@ -63,7 +63,7 @@ xterm
 urxvt
 ~~~~~
 
-.. code-block:: ini
+.. code-block:: properties
     :caption: ~/.Xresources
 
     URxvt.font: xft:Source Code Pro:size=10
