@@ -6,7 +6,7 @@ summary: |
 Being your own Postmaster
 =========================
 
-.. TODO lexers main.cf, dovecot.conf?
+.. TODO lexer for dovecot.conf?
 
 .. contents:: :local:
     :depth: 1
@@ -312,7 +312,7 @@ effectively forwarding mail to the virtual address space:
 
 .. TODO leave out this part?
 
-.. code-block:: txt
+.. code-block:: properties
     :caption: /etc/aliases
     :emphasize-lines: 13,14
 
