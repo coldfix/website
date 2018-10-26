@@ -20,19 +20,6 @@ It turns out, although this feature is not supported natively, it can be
 emulated easily, even though it is not quite as beautiful as the ``let``
 assignments in Haskell.
 
-This post comes in two variants:
-
-- Rookie_: featuring a very realistic and concrete example, lots of nonsense
-  talking, a great story-line and nothing behind.
-- Know-it-all_: for those who just want to get to the point and feel confident
-  with concise and more abstract examples.
-
-.. _Rookie: ../an-unforgettable-family-reunion/
-
-
-Know-it-all
-~~~~~~~~~~~
-
 To avoid recomputation of ``f(x)`` in list-comprehensions such as this:
 
 .. code-block:: python
@@ -49,7 +36,7 @@ in python:
 
     [h(x, y)
      for x in X
-     def y = f(x)
+     let y = f(x)
      if g(x, y)]
 
 However, you can write instead:
