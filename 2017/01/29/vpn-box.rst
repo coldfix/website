@@ -1,4 +1,3 @@
-public: yes
 tags: [vpn, privacy, linux, config, gist]
 summary: |
   Force certain applications to VPN while others stay on your default channel.

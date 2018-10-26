@@ -1,4 +1,3 @@
-public: yes
 tags: [linux, configuration, terminal, theme]
 summary: |
   Why and how to use xterm or urxvt as your default terminal and customize

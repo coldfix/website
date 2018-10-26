@@ -1,4 +1,3 @@
-public: yes
 tags: [linux, config, fonts]
 summary: |
   Just let me configure my font size!

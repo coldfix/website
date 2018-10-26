@@ -1,4 +1,3 @@
-public: yes
 tags: [server, config, ssl, letsencrypt]
 summary: |
   How to issue Let's Encrypt wildcard certificates for netcup

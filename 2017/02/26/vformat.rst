@@ -1,4 +1,3 @@
-public: yes
 tags: [programming, python, gist]
 summary: |
   The packed arguments version of ``str.format()``.

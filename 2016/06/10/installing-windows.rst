@@ -1,4 +1,3 @@
-public: yes
 tags: [windows, rant, installation, config]
 summary: |
   …is as easy as it gets (a.k.a. still a PITA)

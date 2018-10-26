@@ -1,4 +1,3 @@
-public: yes
 tags: [python, deployment, setuptools, performance, bug, rant]
 summary: |
   …for small scripts.

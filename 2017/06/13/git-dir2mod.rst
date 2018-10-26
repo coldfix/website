@@ -1,4 +1,3 @@
-public: yes
 tags: [git, plumbing, history, rewrite, filter-branch, submodule, subtree]
 summary: |
   How to (efficiently) turn a subdirectory into a git submodule.

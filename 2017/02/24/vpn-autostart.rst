@@ -1,4 +1,3 @@
-public: yes
 tags: [vpn, privacy, linux, config, gist, utility]
 summary: |
   Automatically start VPN before the using application.

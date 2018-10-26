@@ -1,4 +1,3 @@
-public: yes
 tags: [lua, functools, variadic, gist]
 summary: |
   Another solution for argument packing in lua

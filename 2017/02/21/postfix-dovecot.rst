@@ -1,4 +1,3 @@
-public: yes
 tags: [dovecot, postfix, mail, server, linux, config, gist]
 summary: |
   Configure postfix + dovecot for your own single account webserver

@@ -1,4 +1,3 @@
-public: yes
 tags: [lua, wat, quirks]
 summary: |
   Why lua is the greatest language in the world.

@@ -1,4 +1,3 @@
-public: yes
 tags: [programming, bug, python, async, refcount]
 summary: |
   Keep reference to your coroutines!

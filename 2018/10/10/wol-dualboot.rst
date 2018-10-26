@@ -1,4 +1,3 @@
-public: yes
 tags: [wol, dual-boot, linux, windows, config]
 summary: |
   Setting up Windows 10 and Linux for Wake-on-LAN

@@ -1,4 +1,3 @@
-public: yes
 tags: [docker, config, error]
 summary: |
   when most containers error with 139

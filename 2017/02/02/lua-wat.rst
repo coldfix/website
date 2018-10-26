@@ -1,4 +1,3 @@
-public: yes
 tags: [lua, wat, quirks, fun]
 summary: |
   Where lua got it right: Variadic functions and argument unacking!

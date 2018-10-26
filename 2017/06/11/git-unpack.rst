@@ -1,4 +1,3 @@
-public: yes
 tags: [git, plumbing, history, rewrite, filter-branch, extract, unpack]
 summary: |
   Writing an efficient tree filter for unpacking zipped files.

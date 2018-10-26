@@ -1,4 +1,3 @@
-public: yes
 tags: [c++, bison, flex, parsing, programming, gist]
 summary: |
   How to use Bison with C++11 to parse ASTs into your preferred data

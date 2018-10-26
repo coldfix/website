@@ -1,4 +1,3 @@
-public: yes
 tags: [dual-boot, linux, config, grub, tricks, snippet]
 summary: |
   Making use of grub-reboot

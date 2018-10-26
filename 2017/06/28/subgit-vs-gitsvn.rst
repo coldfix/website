@@ -1,4 +1,3 @@
-public: yes
 tags: [git, svn, migration, subgit, git-svn, svn2git]
 summary: |
   subgit vs svn2git?

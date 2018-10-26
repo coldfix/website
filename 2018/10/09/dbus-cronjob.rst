@@ -1,4 +1,3 @@
-public: yes
 tags: [dbus, cron, linux, pidgin, util]
 summary: |
   Using the correct D-Bus session ID within cronjobs or SSH.

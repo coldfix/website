@@ -1,4 +1,3 @@
-public: yes
 tags: [git, plumbing, history]
 summary: |
   Asking history questions

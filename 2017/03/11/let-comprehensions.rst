@@ -1,4 +1,3 @@
-public: yes
 tags: [programming, idiom, python, functional]
 summary: |
   Write more list comprehensions!
