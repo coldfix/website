@@ -95,6 +95,7 @@ If you want to maintain the same script across different machines, the
 following may just work in many cases:
 
 .. code-block:: bash
+    :caption: /usr/local/bin/towin
 
     windows_boot_entry="$(
         grep -i windows /boot/grub/grub.cfg |
