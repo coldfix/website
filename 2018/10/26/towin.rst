@@ -21,7 +21,7 @@ The exact line will of course differ on most systems and can be read off from
 
 .. code-block:: bash
 
-    grep -i windows /boot/grub/gruf.cfg
+    grep -i windows /boot/grub/grub.cfg
 
 Alternatively, ``grub-reboot`` can be called with the index of the boot entry,
 but I prefer using the name for more clarity and stability.
