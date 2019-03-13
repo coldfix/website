@@ -39,23 +39,5 @@
         {% block body %}{% endblock %}
       </div>
     </div>
-    <div class="footer">
-      {% if rst -%}
-      <div class="flattr">
-        <a href="https://flattr.com/submit/auto{{ '' -}}
-              ?user_id={{ config.flattr_id -}}
-              &url={{ config.canonical_url|urlencode -}}
-                   {{ link_to('page', slug=ctx.slug)|urlencode -}}
-              &title={{ ctx.title|urlencode -}}
-              &description={{ ctx.summary|urlencode -}}
-              &tags=
-                {%- for tag in builder.get_storage('tags').by_tag|sort -%}
-                  {{ tag|urlencode }}{% if not loop.last %},{%- endif -%}
-                {% endfor -%}
-              &category=text">
-          <img src="//button.flattr.com/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0">
-        </a>
-      </div>
-      {%- endif %}
   </body>
 </html>
