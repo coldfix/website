@@ -136,8 +136,8 @@ haven't uploaded your package to PyPI, you might need additional build
 instructions or may need to bundle additional files.
 
 
-Application exe's
-~~~~~~~~~~~~~~~~~
+Application EXEs
+~~~~~~~~~~~~~~~~
 
 We will now add an ``app.exe`` that launches your application. In the simplest
 case, where clicking your exe should do the same as typing ``python -m app``
@@ -210,22 +210,25 @@ CRT issues
 
 Note that the version of mingw used above is tailored to python 3.4 and
 therefore links against ``msvcr100.dll`` that is not included with python 3.7
--- which will result in startup errors if the DLL is not already present on
-the target machine by accident. This problem can be alleviated by copying the
-DLL to your package distribution:
+– which will result in startup errors if the DLL is not already present on the
+target machine by some happy accident. This problem can be alleviated by
+copying the DLL to your package distribution:
 
 .. code-block:: bat
 
     copy py34\msvcr100.dll pkg\
 
+Furthermore, you have to make absolutetly sure not to pass CRT objects from
+your C code to python, this *will* crash your application at runtime.
+
 If you are still unwilling to use the official compiler, I will now show the
-Do-Not-At-Home solution:
+*don't-do-this-at-home* solution:
 
 gcc can be instructed not to link against its default set of standard runtime
 libraries by passing the ``-nostdlib`` flag. However, in this case, no startup
-code will be executed, you completely on your own with CRT initialization and
-global variable initialization. This is therefore not recommended if you are
-not aware that things can go terribly wrong... Let's get going.
+code will be executed, you are completely on your own with CRT initialization
+and global variable initialization. This is therefore not recommended if you
+are not aware that things can go terribly wrong... Let's get going!
 
 Change your launcher's main function to ``WinMainCRTStartup``, e.g.:
 
@@ -314,13 +317,12 @@ for further documentation):
 .. _VarFileInfo: https://docs.microsoft.com/en-us/windows/desktop/menurc/varfileinfo-block
 
 
-
 Bonus: NSIS Installer
 ~~~~~~~~~~~~~~~~~~~~~
 
 If you like to provide an installer, consider using NSIS_, it's simple and
-powerful. A minimal nsis that extracts the application at a target directory
-might look like this:
+powerful. A minimal nsis script that extracts the application at a target
+directory might look like this:
 
 .. code-block:: nsi
     :caption: app.nsi
@@ -339,7 +341,7 @@ might look like this:
         File /r "pkg\*"
     SectionEnd
 
-It can be used as follows:
+It can be compiled as follows:
 
 .. code-block:: bat
 
