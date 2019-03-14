@@ -103,7 +103,7 @@ Now, create the image as follows:
 
 .. code-block:: bash
 
-   docker built -t certbot/dns-netcup .
+   docker build -t certbot/dns-netcup .
 
 You can now run certbot using docker, e.g. assuming you have put your
 ``netcup_credentials.ini`` file to ``/var/lib/letsencrypt``:
