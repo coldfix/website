@@ -7,6 +7,13 @@ Don't use setuptools entry points…
 
 …for small scripts.
 
+**Update:** I realized that ``pip install`` doesn't have the problem described
+here. This means that you can safely use entry points without any patches if
+you recommend that users install with pip. For more information, see the post
+`4 reasons to always use pip for installation`_.
+
+.. _4 reasons to always use pip for installation: /2019/04/11/use-pip-for-install.rst
+
 Setuptools provides a feature called *entry points* that can be used to define
 for which functions the setup script should `create executables`_ – or to
 `register plugins`_. This is pretty cool (and even works on windows)!
