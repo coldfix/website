@@ -7,15 +7,15 @@ Let's Encrypt wildcard certificates
 
 `Earlier this year`_, `Let's Encrypt`_ gained the ability to issue `wildcard
 certificates`_ (``*.domain.tld``). I was anticipating this eagerly, as this
-removes the need to manually list my 92 subdomains and update the certificate
-every time a new subdomain is added.
+removes the need to manually list some ``23 x 4`` subdomains and update the
+certificate every time a new subdomain is added.
 
-The protocol used to issue wildcard certificates requires the user to proof its
-control over the domain by setting a `TXT record`_ on their DNS server.
-certbot_, the EFF's official client, has several DNS authenticator plugins that
-facilitate this task for major DNS provider APIs. However, there was at first
-no such plugin for my webhosting provider, netcup_, so I went and manually_
-added the TXT records in the web interface the first time.
+The protocol used to issue wildcard certificates requires the user to prove
+their control over the domain by setting a `TXT record`_ on their DNS server.
+certbot_, the EFF's official client, has several DNS authenticator plugins
+that facilitate this task for major DNS provider APIs. However, none for my
+webhosting provider, netcup_. So I went and manually_ added the TXT records in
+the web interface the first time.
 
 .. _Earlier this year: https://community.letsencrypt.org/t/acme-v2-and-wildcard-certificate-support-is-live/55579
 .. _Let's Encrypt: https://letsencrypt.org/
@@ -32,9 +32,9 @@ netcup DNS authenticator
 When the expiry date approached, I decided it was finally time for automation.
 Much to my delight, I discovered that netcup had just recently released a `DNS
 API`_, and that there was already a python wrapper called nc_dnsapi_ on PyPI.
-With these tools writing a certbot plugin became a breeze, and I was able to
-release the first version of the `certbot-dns-netcup`_ plugin on PyPI the next
-day.
+With these tools writing a certbot plugin became a breeze and I have published
+the resulting plugin as `certbot-dns-netcup`_ on PyPI so others can make use
+of it.
 
 .. _DNS API: https://www.netcup-wiki.de/wiki/DNS_API
 .. _nc_dnsapi: https://pypi.org/project/nc-dnsapi/
@@ -60,9 +60,8 @@ this:
    certbot_dns_netcup:dns_netcup_api_key      = 0123456789abcdef0123456789abcdef01234567
    certbot_dns_netcup:dns_netcup_api_password = abcdef0123456789abcdef01234567abcdef0123
 
-Note that the ``certbot-dns-netcup:`` prefix is imposed by certbot for external
-plugins. You will need to remove it from the config file and the command
-options in case the plugin is ever merged into certbot upstream.
+Note that the ``certbot-dns-netcup:`` prefix is imposed by certbot for
+external plugins.
 
 You can now instruct certbot to use the netcup authenticator by passing the
 following options:
@@ -83,8 +82,9 @@ propagate.
 
 .. _you're going to have a hard time: https://certbot.eff.org/docs/contributing.html#writing-your-own-plugin
 .. _CCP: https://ccp.netcup.net/run/daten_aendern.php?sprung=api
-.. _docker:
 
+
+.. _docker:
 
 Docker
 ------
