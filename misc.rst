@@ -10,7 +10,6 @@ Services/sites (see my docker-compose_ config if you're interested):
 - jabber/XMPP: server running on *coldfix.de*. Please, feel free to make
   accounts (this service uses SCRAM_, so I won't get your password)
 - gogs.coldfix.de_: make yourself some free private git repositories
-- cryptpad.coldfix.de_: collaborative zero-knowledge code editing
 - sudoku.coldfix.de_: just because I had already coded the generator when I was in school
 
 Software (maintaining):
