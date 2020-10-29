@@ -5,16 +5,18 @@ About
 
 Welcome to my website!
 
-My name is Thomas and I'm a grumpy barefooted gnome, long-term physics
-student, enthusiast programmer and free software cultist;)
+I am a physicist, enthusiast programmer and free software cultist, and I
+created this place mostly to remind me about things I learned the hard way,
+and to document the solution for certain recurring problems or tasks. It is
+also my hope that some of these lessons might later be useful not only to me
+but to others as well.
 
-The best way to reach me is via email_ or github_. Please send hate-mails
-concerning the inferior website design. Though, in case you want to pursue me
-legally, this is how I am known to the authorities:
+The best way to reach me is via email_ or github_. My postal address is as
+follows:
 
     | Thomas Gläßle
-    | Mönchhofstr. 8
-    | 69120 Heidelberg
+    | Tannenweg 4
+    | 72076 Tübingen
     | — Germany
 
 .. include:: LICENSE.rst
