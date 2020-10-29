@@ -12,7 +12,13 @@ deploy: build
 clean:
 	rm -rf _build
 
-.PHONY: serve build deploy clean
+draft:
+	@./bin/draft
+
+publish:
+	@./bin/publish
+
+.PHONY: serve build deploy clean draft publish
 
 # creating icons:
 

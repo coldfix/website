@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+base="$(dirname "$(readlink -nf "${BASH_SOURCE[0]}")" )"/..
+base="$(realpath --relative-to=. "$base")"
+name=$1
+
+while [[ -z $name || -e "$base/_drafts/$name" ]]; do
+    read -p 'Document name: ' name
+done
+
+draft="$base/_drafts/$name/index.rst"
+echo "Creating new draft at: $draft"
+
+mkdir -p "$(dirname "$draft")"
+cp "$base/_templates/draft.rst" "$draft"
+git add "$draft"
+exec $EDITOR "$draft"

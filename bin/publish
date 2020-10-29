@@ -1,0 +1,35 @@
+#! /usr/bin/env bash
+set -e
+
+trap 'echo ...Aborted; exit 1' SIGINT
+
+base="$(dirname "$(readlink -nf "${BASH_SOURCE[0]}")" )"/..
+base="$(realpath --relative-to=. "$base")"
+name=$1
+
+drafts="$base/_drafts"
+
+while [[ -z $name || ! -e "$drafts/$name" ]]; do
+    PS3=$'\n'"Select draft to publish (^C to abort): "
+    echo
+    echo Available drafts:
+    set -o posix
+    select choice in "$drafts"/*; do
+        if [[ -n $choice ]]; then
+            break
+        fi
+    done
+    set +o posix
+    name="$(basename "$choice")"
+done
+
+draft="$drafts/$name"
+date="$(date +%Y/%m/%d)"
+
+read -p 'Publish as: ' -ei "$name" name
+read -p 'Publish on: ' -ei "$date" date
+
+mkdir -p "$(dirname "$base/$date/$name")"
+git mv "$draft" "$base/$date/$name"
+
+echo "Published as: $base/$date/$name"
