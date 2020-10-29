@@ -20,4 +20,4 @@ WORKDIR /blog
 VOLUME /blog
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["./blogdown", "serve"]
+CMD ["./bin/blogdown", "serve"]
