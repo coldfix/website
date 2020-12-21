@@ -4,10 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-blogdown = {editable = true,git = "https://github.com/blogdown/blogdown"}
-werkzeug = "==0.16.1"
+blogdown = {git = "https://github.com/blogdown/blogdown"}
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
