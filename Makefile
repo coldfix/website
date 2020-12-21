@@ -2,6 +2,7 @@ BLOGDOWN = pipenv run run-blogdown
 
 build: icons
 	$(BLOGDOWN) build
+	cp -r files _build
 
 serve: icons
 	$(BLOGDOWN) serve
