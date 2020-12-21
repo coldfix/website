@@ -7,7 +7,7 @@ while [[ -z $name || -e "$base/_drafts/$name" ]]; do
     read -p 'Document name: ' name
 done
 
-draft="$base/_drafts/$name/index.rst"
+draft="$base/_drafts/$name.rst"
 echo "Creating new draft at: $draft"
 
 mkdir -p "$(dirname "$draft")"
