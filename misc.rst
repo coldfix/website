@@ -10,7 +10,7 @@ Services/sites (see my docker-compose_ config if you're interested):
 - jabber/XMPP: server running on *coldfix.de*. Please, feel free to make
   accounts (this service uses SCRAM_, so I won't get your password)
 - gogs.coldfix.de_: make yourself some free private git repositories
-- sudoku.coldfix.de_: just because I had already coded the generator when I was in school
+- sudoku.coldfix.de_: nothing special
 
 Software (maintaining):
 
@@ -25,11 +25,14 @@ Software (maintaining):
 
 Scientific:
 
-- `Spectrum guided integration for nonrelativistic quantum-mechanical problems
-  <../files/spectrum_guided_integration.pdf>`_ (Bachelor's thesis in physics)
+- `Computational tools for solving a marginal problem with applications in
+  Bell non-locality and causal modeling <https://arxiv.org/abs/1805.03313>`_
+  (Paper on results of the Master's thesis)
 - `Polyhedral Projection, Causality, Quantum Nonlocality: Numerical solution
   of the marginalization problem <../files/polyhedral_projection.pdf>`_
   (Master's thesis in physics)
+- `Spectrum guided integration for nonrelativistic quantum-mechanical problems
+  <../files/spectrum_guided_integration.pdf>`_ (Bachelor's thesis in physics)
 
 
 .. _docker-compose: https://github.com/coldfix/server
