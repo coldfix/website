@@ -3,15 +3,6 @@ public: yes
 Misc
 ====
 
-Shameless self-advertisements:
-
-Services/sites (see my docker-compose_ config if you're interested):
-
-- jabber/XMPP: server running on *coldfix.de*. Please, feel free to make
-  accounts (this service uses SCRAM_, so I won't get your password)
-- gogs.coldfix.de_: make yourself some free private git repositories
-- sudoku.coldfix.de_: nothing special
-
 GitHub:
 
 - `@coldfix`_: my main account with various small projects such as udiskie_,
@@ -19,6 +10,13 @@ GitHub:
 - `@deficient`_: collection of simple widgets for the awesome-wm_. Among others:
   battery_, volume-control_, keyboard-layout_, calendar_, brightness_,
   screensaver_
+
+Services/subdomains (see my docker-compose_ config if you're interested):
+
+- jabber/XMPP: server running on *coldfix.de*. Please, feel free to make
+  accounts (this service uses SCRAM_, so I won't get your password)
+- gogs.coldfix.de_: make yourself some free private git repositories
+- sudoku.coldfix.de_: nothing special
 
 
 .. _docker-compose: https://github.com/coldfix/server
