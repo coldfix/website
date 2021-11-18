@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+main() {
+    local origin=${1-origin}
+    local escaped=$(sed -e 's/:[]\/$*.^[]/\\&/g' <<<"$origin")
+    git branch -a | \
+    sed -n "s:^\s*remotes/$escaped/HEAD -> $escaped/\(.*\)$:\1:p"
+}
+main "$@"
