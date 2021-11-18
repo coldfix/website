@@ -24,7 +24,7 @@ This has a tendency to fail because submodules are only tracked by commit not
 by branch and will therefore go into detached HEAD mode if you ever use ``git
 submodule update`` to checkout their current versions as defined by the parent
 repository. In this case there is simply no active branch that could be
-pulled. Consequentyl, the ``git pull`` fails for the respective submodule,
+pulled. Consequently, the ``git pull`` fails for the respective submodule,
 and, the loop stops executing at the first error, leaving you with the
 responsibility to checkout the correct branch beforehand.  Again, we could try
 ``git submodule foreach`` for that:
@@ -127,10 +127,10 @@ git update-head
 ---------------
 
 There is another (rare) case, that can cause avoidable problems: If the name
-of the remote HEAD branch has changed after you had cloned it, the ``git
-branch -a`` command will not be able to see the new ``HEAD -> branchname``
-mapping (for some reason ``git fetch`` doesn't seem to fetch this information
-as of git v2.34).
+of the remote HEAD branch has changed after you cloned it, the ``git branch
+-a`` command will not be able to see the new ``HEAD -> branchname`` mapping
+(for some reason ``git fetch`` doesn't seem to fetch this information as of
+git v2.34).
 
 For more information on the topic, see `How does origin/HEAD get set?`_. It
 was really helpful for creating the following ``git update-remote-head
@@ -150,8 +150,8 @@ name:
     remote-update-head "$@"
 
 Again, you can `download it here <./git-remote-update-head>`_, make it
-executable, save it as ``~/.local/bin/git-update-head``, make it executable,
-and make sure that folder is in your PATH.
+executable, save it as ``~/.local/bin/git-update-head``, and make sure that
+folder is in your PATH.
 
 Alternatively, put the following alias in your ``~/.gitconfig``:
 
