@@ -20,17 +20,6 @@ GitHub:
   battery_, volume-control_, keyboard-layout_, calendar_, brightness_,
   screensaver_
 
-Scientific:
-
-- `Computational tools for solving a marginal problem with applications in
-  Bell non-locality and causal modeling <https://arxiv.org/abs/1805.03313>`_
-  (Paper on results of the Master's thesis)
-- `Polyhedral Projection, Causality, Quantum Nonlocality: Numerical solution
-  of the marginalization problem <../files/polyhedral_projection.pdf>`_
-  (Master's thesis in physics)
-- `Spectrum guided integration for nonrelativistic quantum-mechanical problems
-  <../files/spectrum_guided_integration.pdf>`_ (Bachelor's thesis in physics)
-
 
 .. _docker-compose: https://github.com/coldfix/server
 .. _SCRAM: https://en.wikipedia.org/wiki/Salted_Challenge_Response_Authentication_Mechanism
