@@ -12,16 +12,13 @@ Services/sites (see my docker-compose_ config if you're interested):
 - gogs.coldfix.de_: make yourself some free private git repositories
 - sudoku.coldfix.de_: nothing special
 
-Software (maintaining):
+GitHub:
 
-- udiskie_: automount tool, frontend for udisks
-- pidgin-tts_: espeak plugin for pidgin_ IM
-- deficient_: collection of simple widgets for the awesome-wm_. Among others:
+- `@coldfix`_: my main account with various small projects such as udiskie_,
+  and Citip_
+- `@deficient`_: collection of simple widgets for the awesome-wm_. Among others:
   battery_, volume-control_, keyboard-layout_, calendar_, brightness_,
   screensaver_
-- Citip_: CLI replacement for ITIP_ and Xitip_ with only free software
-  dependencies
-
 
 Scientific:
 
@@ -40,10 +37,11 @@ Scientific:
 .. _gogs.coldfix.de: https://gogs.coldfix.de
 .. _cryptpad.coldfix.de: https://cryptpad.coldfix.de
 .. _sudoku.coldfix.de: https://sudoku.coldfix.de
+.. _@coldfix: https://github.com/coldfix
 .. _udiskie: https://github.com/coldfix/udiskie
 .. _pidgin-tts: https://github.com/coldfix/pidgin-tts
 .. _pidgin: https://www.pidgin.im/
-.. _deficient: https://github.com/deficient/
+.. _@deficient: https://github.com/deficient/
 .. _battery: https://github.com/deficient/battery-widget
 .. _volume-control: https://github.com/deficient/volume-control
 .. _keyboard-layout: https://github.com/deficient/keyboard-layout-indicator
