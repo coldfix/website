@@ -1,4 +1,4 @@
-tags: [coding, python]
+tags: [git, submodule]
 summary: |
   Using the current remote HEAD
 
