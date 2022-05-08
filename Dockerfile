@@ -1,7 +1,7 @@
 FROM python:3.6-alpine3.6
 
 ARG build_deps="git"
-ARG runtime_deps="dumb-init make imagemagick"
+ARG runtime_deps="make imagemagick"
 ARG blogger_uid=1000
 
 RUN apk update && \
@@ -19,5 +19,4 @@ COPY . /blog
 WORKDIR /blog
 VOLUME /blog
 
-ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 CMD ["./bin/blogdown", "serve"]
