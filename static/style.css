@@ -248,6 +248,8 @@ div.hll .cp {
 div.content tt.literal {
   background-color: #f3f3f3;
   border-radius: 4px;
+  padding-left: 0.25em;
+  padding-right: 0.25em;
 }
 
 div.content div.section {
@@ -269,4 +271,14 @@ div.content h2:hover a.section-link:hover {
   color: red;
   background-color: #dddddd;
   visibility: visible;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #ccc;
+  }
+  div.content tt.literal {
+    background-color: #434343;
+    border-radius: 4px;
+  }
 }
