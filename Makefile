@@ -1,4 +1,4 @@
-BLOGDOWN = pipenv run run-blogdown
+BLOGDOWN = run-blogdown
 
 build: icons
 	$(BLOGDOWN) build
