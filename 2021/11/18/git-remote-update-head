@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+remote-update-head() {
+    local origin=${1-origin}
+    git remote set-head "$origin" "$(
+        git remote show "$origin" |
+        sed -n 's/^\s*HEAD branch: \(.*\)$/\1/p'
+    )"
+}
+remote-update-head "$@"
