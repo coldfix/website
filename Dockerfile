@@ -1,15 +1,13 @@
-FROM python:3.6-alpine3.6
+FROM python:3.10-alpine3.15
 
-ARG build_deps="git"
-ARG runtime_deps="make imagemagick"
-ARG blogger_uid=1000
+ARG UID=1000
+RUN adduser -D -H -h /blog -u $UID blogger
 
-RUN apk update && \
-    apk add -u $build_deps $runtime_deps && \
-    adduser -D -H -h /blog -u $blogger_uid blogger && \
-    git clone https://github.com/blogdown/blogdown && \
+RUN apk add -U git --virtual .build-deps && \
+    apk add -U make imagemagick && \
+    git clone https://github.com/blogdown/blogdown --depth 1 && \
     pip install ./blogdown && \
-    apk del $build_deps && \
+    apk del .build-deps && \
     rm -rf blogdown
 
 EXPOSE 5000
