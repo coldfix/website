@@ -1,4 +1,4 @@
-BLOGDOWN = run-blogdown
+BLOGDOWN = blogdown
 
 build: icons
 	$(BLOGDOWN) build
