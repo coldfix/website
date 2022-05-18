@@ -1,8 +1,18 @@
 @charset "utf-8";
-@import url(//fonts.googleapis.com/css?family=Merriweather:400);
 
-body {
-  font-family: Merriweather, Georgia, serif;
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: DejaVu Sans, Helvetica, Arial, Verdana, serif;
   color: #222;
 }
 
@@ -35,11 +45,10 @@ div.outer-header {
 div.header {
 	background-color: #882222;
 	padding: 1rem 2rem;
-  position: fixed;
+  position: relative;
   top: 5rem;
   left: 1rem;
-  height: 10rem;
-  width: 9rem;
+  width: 13rem;
   border-radius: 2ex;
 }
 
@@ -84,17 +93,16 @@ ul.tagcloud > li {
 }
 
 div.main {
+  padding: 1rem;
   margin-top: 2rem;
-  margin-left: 16rem;
-  margin-right: 4rem;
+  margin-left: 15rem;
 }
 
 div.content {
-  max-width: 45em;
+  max-width: 48em;
   margin: 1ex auto;
-  line-height: 29px;
-  font-size: 16px;
-  text-align: justify;
+  line-height: 150%;
+  text-align: left;
 }
 
 div.content h1.title {
@@ -125,12 +133,12 @@ div.entry-overview div.date {
 }
 
 div.entry-overview div.detail div.summary {
-  margin: 1ex 0 0 0;
-  line-height: 24px;
+  margin: 0;
 }
 
 div.entry-overview div.detail h1 {
   margin: 0;
+  line-height: 150%;
 }
 
 
@@ -175,7 +183,7 @@ div.footer div.flattr img {
 
 .literal-block-wrapper, .literal-block-wrapper pre {
   line-height: normal;
-  font-size: 13px;
+  font-size: 0.8rem;
   font-family: "Source Code Pro", "Consolas", "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", "Monaco", "Courier New", "monospace";
 }
 
@@ -192,7 +200,7 @@ div.footer div.flattr img {
   padding: 5px;
   padding-left: 10px;
   color: white;
-  font-size: 14px;
+  font-size: 0.9rem;
   box-sizing: border-box;
 }
 
@@ -280,5 +288,50 @@ div.content h2:hover a.section-link:hover {
   div.content tt.literal {
     background-color: #434343;
     border-radius: 4px;
+  }
+}
+
+@media screen and (max-width: 55rem) {
+  div.outer-header {
+    position: static;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1rem;
+    flex-wrap: wrap;
+  }
+
+  div.header {
+    padding: 0.2rem 2rem;
+    position: static;
+    height: auto;
+    width: auto;
+    border-radius: 1ex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  div.header > .blogtitle {
+    flex-shrink: 0;
+  }
+
+  ul.navigation {
+    display: flex;
+    align-items: center;
+  }
+
+  ul.navigation > li {
+    margin: 0.5rem 0.5rem;
+  }
+
+  div.main {
+    margin: 2rem auto;
+  }
+
+  div.content {
+    line-height: normal;
   }
 }
