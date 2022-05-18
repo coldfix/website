@@ -185,6 +185,7 @@ div.footer div.flattr img {
   line-height: normal;
   font-size: 0.8rem;
   font-family: "Source Code Pro", "Consolas", "Deja Vu Sans Mono", "Bitstream Vera Sans Mono", "Monaco", "Courier New", "monospace";
+  overflow: scroll;
 }
 
 .literal-block-wrapper .caption, .hlltable, .hll {
