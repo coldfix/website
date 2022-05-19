@@ -30,10 +30,7 @@ a:hover {
   text-decoration: underline;
 }
 
-#container {
-}
-
-div.outer-header {
+header {
 	background-color: #660000;
   position: fixed;
   top: 0rem;
@@ -42,7 +39,7 @@ div.outer-header {
   width: 15rem;
 }
 
-div.header {
+.headerbox {
 	background-color: #882222;
 	padding: 1rem 2rem;
   position: relative;
@@ -50,30 +47,33 @@ div.header {
   left: 1rem;
   width: 13rem;
   border-radius: 2ex;
+  box-shadow: 0 0 10px 0 #882222;
 }
 
-div.header a {
+.headerbox a {
   color: white;
   font-weight: bold;
 }
 
-div.header a:hover {
+.headerbox a:hover {
   color: #bbbbbb;
 }
 
-div.header .blogtitle {
+.headerbox h1 {
   color: #bbbbbb;
   font-weight: bold;
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
 }
 
-ul.navigation {
-  list-style: none;
+nav {
 	text-align: left;
   margin: 0;
   padding: 0;
 }
 
-ul.navigation > li {
+nav > a {
   margin: 0.5rem 1rem;
   padding: 0;
 }
@@ -92,7 +92,7 @@ ul.tagcloud > li {
   border-radius: 6px;
 }
 
-div.main {
+main {
   padding: 1rem;
   margin-top: 2rem;
   margin-left: 15rem;
@@ -293,7 +293,7 @@ div.content h2:hover a.section-link:hover {
 }
 
 @media screen and (max-width: 55rem) {
-  div.outer-header {
+  header {
     position: static;
     width: 100%;
     height: auto;
@@ -303,7 +303,7 @@ div.content h2:hover a.section-link:hover {
     flex-wrap: wrap;
   }
 
-  div.header {
+  .headerbox {
     padding: 0.2rem 2rem;
     position: static;
     height: auto;
@@ -315,20 +315,20 @@ div.content h2:hover a.section-link:hover {
     flex-wrap: wrap;
   }
 
-  div.header > .blogtitle {
+  .headerbox > .blogtitle {
     flex-shrink: 0;
   }
 
-  ul.navigation {
+  nav {
     display: flex;
     align-items: center;
   }
 
-  ul.navigation > li {
+  nav > a {
     margin: 0.5rem 0.5rem;
   }
 
-  div.main {
+  main {
     margin: 2rem auto;
   }
 

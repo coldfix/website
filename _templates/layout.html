@@ -21,24 +21,22 @@
     <script src="/static/section-links.js"></script>
   </head>
   <body>
-    <div class="outer-header">
-      <div class="header">
-        <div class="blogtitle">
-          {{ config.blogtitle }}
-        </div>
-        <ul class="navigation">
-          <li><a href="/">recent</a></li>
-          <li><a href="/archive">archive</a></li>
-          <li><a href="/tags">tags</a></li>
-          <li><a href="/misc">misc</a></li>
-          <li><a href="/about/">about</a></li>
-        </ul>
+    <header>
+      <div class="headerbox">
+        <h1>{{ config.blogtitle }}</h1>
+        <nav>
+          <a href="/">recent</a>
+          <a href="/archive">archive</a>
+          <a href="/tags">tags</a>
+          <a href="/misc">misc</a>
+          <a href="/about/">about</a>
+        </nav>
       </div>
-    </div>
-    <div class="main">
+    </header>
+    <main>
       <div class="content">
         {% block body %}{% endblock %}
       </div>
-    </div>
+    </main>
   </body>
 </html>
