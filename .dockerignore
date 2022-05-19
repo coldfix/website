@@ -1,0 +1,8 @@
+_build
+*.pyc
+*.pdl
+*.aux
+*.log
+*.png
+*.ico
+.git
