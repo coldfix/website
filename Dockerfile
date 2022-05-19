@@ -13,8 +13,7 @@ RUN apk add -U git --virtual .build-deps && \
 EXPOSE 5000
 USER blogger
 
-COPY . /blog
+COPY --chown=blogger . /blog
 WORKDIR /blog
-VOLUME /blog
 
 CMD ["./bin/blogdown", "serve"]
