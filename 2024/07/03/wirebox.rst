@@ -116,33 +116,34 @@ different editor by using e.g. ``sudo SUDO_EDITOR=nano visudo`` (but the
 editor command needs to be *blocking*, i.e. stay in foreground until the file
 is closed).
 
-Add these lines near the bottom and replace *thomas* by your actual username:
+Add this line near the bottom and replace *thomas* by your actual username:
 
 .. code-block:: bash
     :caption: /etc/sudoers
 
-    thomas ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/pia-wirebox up
-    thomas ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/pia-wirebox down
-    thomas ALL=(ALL:ALL) NOPASSWD: /usr/local/bin/pia-wirebox run thomas *
+    thomas ALL = (root) NOSETENV: NOPASSWD: /usr/local/bin/pia-wirebox *
 
-**Important:** Do not leave out the subcommand or the ``<USERNAME>`` part from
-any of these lines! Without it, you will get passwordless sudo to run any
-command as any user.
+**Note:** Make sure ``env_reset`` is *not* disabled and ``SUDO_USER`` is *not*
+added to ``env_keep``. Otherwise, please don't use passwordless sudo. The
+``pia-wirebox`` script uses the ``$SUDO_USER`` environment variable provided
+by ``sudo`` to run the command after ``run`` as the original user who executed
+sudo (you can check this by running ``pia-wirebox run id -u``). Along with the
+described sudoers config, I believe this should be enough to prevent privilege
+escalation, but run at your own risk.
 
-If you prefer, you can define these settings in their own file under
-``/etc/sudoers.d`` using:
+If your sudoers has a line that reads ``@includedir /etc/sudoers.d`` it may be
+preferred to add this setting in a separate file under ``/etc/sudoers.d``
+using:
 
 .. code-block:: bash
 
     sudo visudo /etc/sudoers.d/pia-wirebox
 
-This requires a ``@includedir /etc/sudoers.d`` line in ``/etc/sudoers``.
-
 An sleek alternative (that simplifies the installation process and avoids the
 risk of misconfiguring your system) is to make use of the SUID bit. However,
-for security reasons, linux does not allow this for interpretable scripts.
-This would require creating a real binary (using e.g. ``shc``), but this is
-outside the scope of this article.
+linux does not allow this for interpretable scripts for security reasons.
+Hence, this approach requires creating a real binary (using e.g. ``shc``), but
+this is outside the scope of this article.
 
 
 Usage
@@ -153,14 +154,17 @@ command in the network namespace by hitting:
 
 .. code-block:: bash
 
-    sudo wirebox run $USER COMMAND [args..]
+    sudo wirebox run COMMAND [args..]
+
+    # For example:
+    sudo wirebox run curl coldfix.de
 
 If desired, set up a script or an alias to make this easier for you, e.g.:
 
 .. code-block:: bash
     :caption: ~/.bashrc
 
-    alias wirebox="sudo pia-wirebox run $USER"
+    alias wirebox="sudo /usr/local/bin/pia-wirebox run"
 
 
 Related resources

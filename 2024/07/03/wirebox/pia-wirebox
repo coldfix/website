@@ -14,10 +14,10 @@ USAGE="USAGE:
 CONFIG=/etc/wireguard/pia-wirebox.conf
 
 # Name of network namespace (can be left as is):
-NETNS=wirebox-ns
+NETNS=pia-wirebox
 
 # Name of network interface (can be left as is)
-IFNAME=wirebox-if
+IFNAME=wg-pia
 
 # Content of file "ca.rsa.4096.crt",
 # pasted here to spare you the need of installing yet another file:
@@ -67,8 +67,7 @@ iyd1Fzx0yujuiXDROLhISLQDRjVVAvawrAtLZWYK31bY7KlezPlQnl/D9Asxe85l
 
 main() {
     if [[ $EUID -ne 0 ]]; then
-        echo "This script must be run as root!" >&2
-        exit 1
+        exec sudo "${@:0}"
     fi
 
     case "$1" in
@@ -83,21 +82,10 @@ main() {
 }
 
 # Run command as user:
-# Usage: run <username> <command> [<args...>]
+# Usage: run <command> [<args...>]
 run() {
-    # If using a real binary with SUID bit, the following tries to protect
-    # against privilege escalation. With a script + sudo, it doesn't
-    # do anything because $UID will always be 0.
-    #
-    # In fact, if you do the SUID approach, it would be better to just remove
-    # the <username> parameter from this function and have it determined by
-    # `id -urn` automatically.
-    if [[ "$(id -ur)" -ne 0 && "$(id -urn)" != "$1" ]]; then
-        echo "Only allowed to run command as user '$(id -urn)'"
-    fi
-
     up
-    ip netns exec $NETNS sudo -u "$1" -- "${@:2}"
+    ip netns exec $NETNS sudo -u "${SUDO_USER:-$(id -urn)}" -- "$@"
 }
 
 # Check if connection is up:
