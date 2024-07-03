@@ -156,8 +156,8 @@ command in the network namespace by hitting:
 
     sudo wirebox run COMMAND [args..]
 
-    # For example:
-    sudo wirebox run curl coldfix.de
+    # For example, determine your external (VPN) IP as seen by the outside world:
+    sudo wirebox run dig @resolver4.opendns.com myip.opendns.com +short -4
 
 If desired, set up a script or an alias to make this easier for you, e.g.:
 
